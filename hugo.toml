@@ -1,0 +1,8 @@
+baseURL = 'https://example.org/'
+languageCode = 'zh-cn'
+title = 'Zhengbo Wang Blog'
+theme = "archie"
+
+[params]
+mode = "auto"
+katex = true  # enable KaTeX support

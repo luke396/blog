@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>6.006 L01 - Zhengbo Wang Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Introduction
+
+Purpose of class
+
+这门课的目的在于，解决计算问题的同时，要去交流和证明解决办法是正确的、有效的
+包含解决问题，证明正确性，证明有效性，如何用通用术语进行交流
+
+关于交流的提法，是第一次见到
+
+
+
+
+Definition of problem and algorithm
+
+问题是有输入和输出的二元关系
+
+不要试图去指定所有输入对应的结果，无数的可能是无法枚举的
+这门课通常在讨论一般性的，大数据量输入
+
+
+算法，在定义的时候，提到了每个输入，都对应一个确定的输出
+
+或许一个输入有很多正确结果，但是算法就应该类似函数那样，只返回一个
+
+返回哪个显然与具体算法的过程有关
+
+
+一个算法，可以被定义为解决问题，就是他能够对问题的每个输入都返回一个正确的输出
+
+
+
+
+
+Problem Solving with Algorithms
+
+Examples of problems and corresponding algorithms
+
+问题的例子是，班级里面，是否有生日相同的同学
+一个直观的简单算法就是，从一个空的数据开始，不断询问记录每个同学的生日，每当得到一个新的生日，就与已有的生日相互比较，如果相同，则返回当前同学与从数据中找到的另一位同学，否则将当前同学的生日记录，再重复过程。如果问遍了全部的同学，也没有得到相同的生日，就返回空集。
+
+这个算法，或许计算机因为没有技术细节而无法理解，但是人类应该可以理解并翻译成计算机语言了
+
+
+
+
+Generalization to large input spaces
+
+general 的含义可以进一步理解为，任意大的输入
+这门课讨论的算法，应该对任意大的输入都有效
+
+
+
+Correctness of Algorithms
+
+Proving algorithm correctness using induction
+
+对于小数量的输入，自然可以一一验证
+对于任意大小的输入，通常需要递归或者循环来解决问题
+
+归纳法是证明其正确性的普遍方法
+不赘述归纳法细节，这里与数学上的归纳法基本一致，
+从验证 $k=0$ 开始，假设 $k=k&rsquo;$ 正确，验证 $k=k&rsquo;&#43;1$ 的正确性，进而令 $k\to \infty=n$，一般性得到证明
+
+
+
+
+
+Efficiency of Algorithms
+
+Importance of efficiency
+
+为了找到更优秀的算法，我们需要对算法运行时间/效率进行比较。
+同一个输入和算法，在不同配置的机器上的运行实际时间是不同的。为了得到任意情况下的，针对问题的高效率算法，显然比较绝对运行时间是不可行的
+所以，我们需要定义一种固定操作 - 这一操作的时间是一定的，然后计算不同算法下所需要不同操作数，作为算法所消耗时间的衡量
+
+
+Asymptotic Notation
+
+为了表示不同算法的不同效率，引入渐进符号 - asymptotic notation
+上界 - $O(f(n))$，下界 - $\Omega(f(n))$，紧界 (tight bound) - $\Theta(f(n))$
+
+思想在于忽略常数和低阶项的影响，只关注最主要的项，具体的定义略去
+上界在是实际中应用更加广泛，其余两个更多用在学术一些、专业一些的场合
+
+
+有常数 $\Theta(1)$，对数 $\Theta(\log n)$，线性 $\Theta(n)$，对数线性 $\Theta(n\log n)$，
+平方 $\Theta(n^{2})$，多项式 $\Theta(n^c)$，指数 $2^{\Theta(n^c)}$
+在 recitation 中有渐进的计算练习
+
+
+
+Model of Computation
+
+Word-RAM model
+
+这些主要是为了定义，$O(1)$ 常数复杂度的操作，有 整数运算 -integer arithmetic，逻辑运算 - logical operation，
+字节运算 - bitwise arithmetic 以及读写给定地址的 word。这个理论复杂度，在实际中由于不同硬件等因素会在操作时间上有所区别。
+word 就是是处理器 (processor) 作为单个单元处理的固定大小 (w 个 bit) 的整数，从 ${0,1,\dots,2^w - 1}$，
+例如在 32-bit 系统中就是 32 个 bit/4 个 byte 大小，w 就是 w-bit Word-RAM 的 word size
+
+bit，就是 01；八个 bit 组成一个 byte，例如 01101000。
+为什么 word size 很重要，因为小的字长可能会限制性能，大的字长可以一次性处理更多的数据，
+这也是 64 位系统相对于 32 位在内存寻址、数据处理等方面的进步。
+
+
+memory 是为 CPU 的操作提供数据的地方，通常指的是 RAM - Random Access Memory,
+允许 CPU 快速的读取和写入数据，同时也储存 CPU 执行的指令
+
+内存中的每个 byte 都有一个唯一的 address，以便 CPU 快速定位
+在 32bit 系统中 address 的大小就是 32bit，那么也就可以有 $2^{32}$ (约 40 亿) 种地址表示。
+注意到每个地址指向一个 byte，那么也就是说， 32bit 的系统的
+总的可寻址空间 - addressable memory space 为 4GB - 40 亿个 byte。
+
+由于其他限制 (系统保留区域或其他架构限制)，这个理论最大值总几乎不可能达到的。
+
+
+
+
+
+
+Basic operations and memory limits
+
+输入大小为 $n$ 个 machine word，其应该小于 $2^w$，以保证其每个 word 的地址可以都放入内存中，
+以 $O(1)$ 方式访问，即 $w&gt;\log_{2}n$，其中 $\log_{2}n$ 为最大的地址
+
+64bit 可寻址空间 $2^{64}$ 个 byte 目前看是足够大的，可以满足这个要求
+
+
+
+
+
+Data Structures
+
+Definition and examples
+
+数据结构，是储存非常量数据 (non-constant data) 的方式，同时支持一些列操作，这些操作的集合被称为接口 - interface
+non-constant / not static 的意思是数据可以被移动、添加和移除等，
+数据结构提供提供了这种动态操作 (dynamic operation) 的能力
+很多数据结构都可以支持同一接口，但是具有不同的性能
+
+
+Static Array example for birthday matching
+
+静态数组 - 固定宽度和长度，静态队列接口；python 中的 tuple 是动态数组
+
+StaticArray(n) - 初始化大小为 $n$ 的静态数组，每个元素都是 0 - $\Theta(n)$
+StaticArray_get_at(i) - 返回指定位置 $i$ 的元素 - $\Theta(1)$
+StaticArray_set_at(i,x) - 将 $x$ 写入位置 $i$- $\Theta(1)$
+之所以 get 和 set 方法是常数时间，是因为这个数组中的每个元素具有固定大小 - 一个 machine word
+
+
+
+
+
+Running Time Analysis
+
+Analyzing the birthday matching algorithm
+
+recitation 上有详细的例子
+考虑循环为乘法的基本求和计算，来计算整个函数的运行时间 - running time，用 $O$ 表示上界
+可以通过，更换不同的数据结构来简化算法的时间复杂度
+
+
+" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/6.006-l01/">
+  <meta property="og:site_name" content="Zhengbo Wang Blog">
+  <meta property="og:title" content="6.006 L01">
+  <meta property="og:description" content="Introduction Purpose of class 这门课的目的在于，解决计算问题的同时，要去交流和证明解决办法是正确的、有效的 包含解决问题，证明正确性，证明有效性，如何用通用术语进行交流 关于交流的提法，是第一次见到 Definition of problem and algorithm 问题是有输入和输出的二元关系 不要试图去指定所有输入对应的结果，无数的可能是无法枚举的 这门课通常在讨论一般性的，大数据量输入 算法，在定义的时候，提到了每个输入，都对应一个确定的输出 或许一个输入有很多正确结果，但是算法就应该类似函数那样，只返回一个 返回哪个显然与具体算法的过程有关 一个算法，可以被定义为解决问题，就是他能够对问题的每个输入都返回一个正确的输出 Problem Solving with Algorithms Examples of problems and corresponding algorithms 问题的例子是，班级里面，是否有生日相同的同学 一个直观的简单算法就是，从一个空的数据开始，不断询问记录每个同学的生日，每当得到一个新的生日，就与已有的生日相互比较，如果相同，则返回当前同学与从数据中找到的另一位同学，否则将当前同学的生日记录，再重复过程。如果问遍了全部的同学，也没有得到相同的生日，就返回空集。 这个算法，或许计算机因为没有技术细节而无法理解，但是人类应该可以理解并翻译成计算机语言了 Generalization to large input spaces general 的含义可以进一步理解为，任意大的输入 这门课讨论的算法，应该对任意大的输入都有效 Correctness of Algorithms Proving algorithm correctness using induction 对于小数量的输入，自然可以一一验证 对于任意大小的输入，通常需要递归或者循环来解决问题 归纳法是证明其正确性的普遍方法 不赘述归纳法细节，这里与数学上的归纳法基本一致， 从验证 $k=0$ 开始，假设 $k=k’$ 正确，验证 $k=k’&#43;1$ 的正确性，进而令 $k\to \infty=n$，一般性得到证明 Efficiency of Algorithms Importance of efficiency 为了找到更优秀的算法，我们需要对算法运行时间/效率进行比较。 同一个输入和算法，在不同配置的机器上的运行实际时间是不同的。为了得到任意情况下的，针对问题的高效率算法，显然比较绝对运行时间是不可行的 所以，我们需要定义一种固定操作 - 这一操作的时间是一定的，然后计算不同算法下所需要不同操作数，作为算法所消耗时间的衡量 Asymptotic Notation 为了表示不同算法的不同效率，引入渐进符号 - asymptotic notation 上界 - $O(f(n))$，下界 - $\Omega(f(n))$，紧界 (tight bound) - $\Theta(f(n))$ 思想在于忽略常数和低阶项的影响，只关注最主要的项，具体的定义略去 上界在是实际中应用更加广泛，其余两个更多用在学术一些、专业一些的场合 有常数 $\Theta(1)$，对数 $\Theta(\log n)$，线性 $\Theta(n)$，对数线性 $\Theta(n\log n)$， 平方 $\Theta(n^{2})$，多项式 $\Theta(n^c)$，指数 $2^{\Theta(n^c)}$ 在 recitation 中有渐进的计算练习 Model of Computation Word-RAM model 这些主要是为了定义，$O(1)$ 常数复杂度的操作，有 整数运算 -integer arithmetic，逻辑运算 - logical operation， 字节运算 - bitwise arithmetic 以及读写给定地址的 word。这个理论复杂度，在实际中由于不同硬件等因素会在操作时间上有所区别。 word 就是是处理器 (processor) 作为单个单元处理的固定大小 (w 个 bit) 的整数，从 ${0,1,\dots,2^w - 1}$， 例如在 32-bit 系统中就是 32 个 bit/4 个 byte 大小，w 就是 w-bit Word-RAM 的 word size bit，就是 01；八个 bit 组成一个 byte，例如 01101000。 为什么 word size 很重要，因为小的字长可能会限制性能，大的字长可以一次性处理更多的数据， 这也是 64 位系统相对于 32 位在内存寻址、数据处理等方面的进步。 memory 是为 CPU 的操作提供数据的地方，通常指的是 RAM - Random Access Memory, 允许 CPU 快速的读取和写入数据，同时也储存 CPU 执行的指令 内存中的每个 byte 都有一个唯一的 address，以便 CPU 快速定位 在 32bit 系统中 address 的大小就是 32bit，那么也就可以有 $2^{32}$ (约 40 亿) 种地址表示。 注意到每个地址指向一个 byte，那么也就是说， 32bit 的系统的 总的可寻址空间 - addressable memory space 为 4GB - 40 亿个 byte。 由于其他限制 (系统保留区域或其他架构限制)，这个理论最大值总几乎不可能达到的。 Basic operations and memory limits 输入大小为 $n$ 个 machine word，其应该小于 $2^w$，以保证其每个 word 的地址可以都放入内存中， 以 $O(1)$ 方式访问，即 $w&gt;\log_{2}n$，其中 $\log_{2}n$ 为最大的地址 64bit 可寻址空间 $2^{64}$ 个 byte 目前看是足够大的，可以满足这个要求 Data Structures Definition and examples 数据结构，是储存非常量数据 (non-constant data) 的方式，同时支持一些列操作，这些操作的集合被称为接口 - interface non-constant / not static 的意思是数据可以被移动、添加和移除等， 数据结构提供提供了这种动态操作 (dynamic operation) 的能力 很多数据结构都可以支持同一接口，但是具有不同的性能 Static Array example for birthday matching 静态数组 - 固定宽度和长度，静态队列接口；python 中的 tuple 是动态数组 StaticArray(n) - 初始化大小为 $n$ 的静态数组，每个元素都是 0 - $\Theta(n)$ StaticArray_get_at(i) - 返回指定位置 $i$ 的元素 - $\Theta(1)$ StaticArray_set_at(i,x) - 将 $x$ 写入位置 $i$- $\Theta(1)$ 之所以 get 和 set 方法是常数时间，是因为这个数组中的每个元素具有固定大小 - 一个 machine word Running Time Analysis Analyzing the birthday matching algorithm recitation 上有详细的例子 考虑循环为乘法的基本求和计算，来计算整个函数的运行时间 - running time，用 $O$ 表示上界 可以通过，更换不同的数据结构来简化算法的时间复杂度">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-09T21:00:17+08:00">
+    <meta property="article:modified_time" content="2025-01-09T21:00:17+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="6.006 L01">
+  <meta name="twitter:description" content="Introduction Purpose of class 这门课的目的在于，解决计算问题的同时，要去交流和证明解决办法是正确的、有效的 包含解决问题，证明正确性，证明有效性，如何用通用术语进行交流 关于交流的提法，是第一次见到 Definition of problem and algorithm 问题是有输入和输出的二元关系 不要试图去指定所有输入对应的结果，无数的可能是无法枚举的 这门课通常在讨论一般性的，大数据量输入 算法，在定义的时候，提到了每个输入，都对应一个确定的输出 或许一个输入有很多正确结果，但是算法就应该类似函数那样，只返回一个 返回哪个显然与具体算法的过程有关 一个算法，可以被定义为解决问题，就是他能够对问题的每个输入都返回一个正确的输出 Problem Solving with Algorithms Examples of problems and corresponding algorithms 问题的例子是，班级里面，是否有生日相同的同学 一个直观的简单算法就是，从一个空的数据开始，不断询问记录每个同学的生日，每当得到一个新的生日，就与已有的生日相互比较，如果相同，则返回当前同学与从数据中找到的另一位同学，否则将当前同学的生日记录，再重复过程。如果问遍了全部的同学，也没有得到相同的生日，就返回空集。 这个算法，或许计算机因为没有技术细节而无法理解，但是人类应该可以理解并翻译成计算机语言了 Generalization to large input spaces general 的含义可以进一步理解为，任意大的输入 这门课讨论的算法，应该对任意大的输入都有效 Correctness of Algorithms Proving algorithm correctness using induction 对于小数量的输入，自然可以一一验证 对于任意大小的输入，通常需要递归或者循环来解决问题 归纳法是证明其正确性的普遍方法 不赘述归纳法细节，这里与数学上的归纳法基本一致， 从验证 $k=0$ 开始，假设 $k=k’$ 正确，验证 $k=k’&#43;1$ 的正确性，进而令 $k\to \infty=n$，一般性得到证明 Efficiency of Algorithms Importance of efficiency 为了找到更优秀的算法，我们需要对算法运行时间/效率进行比较。 同一个输入和算法，在不同配置的机器上的运行实际时间是不同的。为了得到任意情况下的，针对问题的高效率算法，显然比较绝对运行时间是不可行的 所以，我们需要定义一种固定操作 - 这一操作的时间是一定的，然后计算不同算法下所需要不同操作数，作为算法所消耗时间的衡量 Asymptotic Notation 为了表示不同算法的不同效率，引入渐进符号 - asymptotic notation 上界 - $O(f(n))$，下界 - $\Omega(f(n))$，紧界 (tight bound) - $\Theta(f(n))$ 思想在于忽略常数和低阶项的影响，只关注最主要的项，具体的定义略去 上界在是实际中应用更加广泛，其余两个更多用在学术一些、专业一些的场合 有常数 $\Theta(1)$，对数 $\Theta(\log n)$，线性 $\Theta(n)$，对数线性 $\Theta(n\log n)$， 平方 $\Theta(n^{2})$，多项式 $\Theta(n^c)$，指数 $2^{\Theta(n^c)}$ 在 recitation 中有渐进的计算练习 Model of Computation Word-RAM model 这些主要是为了定义，$O(1)$ 常数复杂度的操作，有 整数运算 -integer arithmetic，逻辑运算 - logical operation， 字节运算 - bitwise arithmetic 以及读写给定地址的 word。这个理论复杂度，在实际中由于不同硬件等因素会在操作时间上有所区别。 word 就是是处理器 (processor) 作为单个单元处理的固定大小 (w 个 bit) 的整数，从 ${0,1,\dots,2^w - 1}$， 例如在 32-bit 系统中就是 32 个 bit/4 个 byte 大小，w 就是 w-bit Word-RAM 的 word size bit，就是 01；八个 bit 组成一个 byte，例如 01101000。 为什么 word size 很重要，因为小的字长可能会限制性能，大的字长可以一次性处理更多的数据， 这也是 64 位系统相对于 32 位在内存寻址、数据处理等方面的进步。 memory 是为 CPU 的操作提供数据的地方，通常指的是 RAM - Random Access Memory, 允许 CPU 快速的读取和写入数据，同时也储存 CPU 执行的指令 内存中的每个 byte 都有一个唯一的 address，以便 CPU 快速定位 在 32bit 系统中 address 的大小就是 32bit，那么也就可以有 $2^{32}$ (约 40 亿) 种地址表示。 注意到每个地址指向一个 byte，那么也就是说， 32bit 的系统的 总的可寻址空间 - addressable memory space 为 4GB - 40 亿个 byte。 由于其他限制 (系统保留区域或其他架构限制)，这个理论最大值总几乎不可能达到的。 Basic operations and memory limits 输入大小为 $n$ 个 machine word，其应该小于 $2^w$，以保证其每个 word 的地址可以都放入内存中， 以 $O(1)$ 方式访问，即 $w&gt;\log_{2}n$，其中 $\log_{2}n$ 为最大的地址 64bit 可寻址空间 $2^{64}$ 个 byte 目前看是足够大的，可以满足这个要求 Data Structures Definition and examples 数据结构，是储存非常量数据 (non-constant data) 的方式，同时支持一些列操作，这些操作的集合被称为接口 - interface non-constant / not static 的意思是数据可以被移动、添加和移除等， 数据结构提供提供了这种动态操作 (dynamic operation) 的能力 很多数据结构都可以支持同一接口，但是具有不同的性能 Static Array example for birthday matching 静态数组 - 固定宽度和长度，静态队列接口；python 中的 tuple 是动态数组 StaticArray(n) - 初始化大小为 $n$ 的静态数组，每个元素都是 0 - $\Theta(n)$ StaticArray_get_at(i) - 返回指定位置 $i$ 的元素 - $\Theta(1)$ StaticArray_set_at(i,x) - 将 $x$ 写入位置 $i$- $\Theta(1)$ 之所以 get 和 set 方法是常数时间，是因为这个数组中的每个元素具有固定大小 - 一个 machine word Running Time Analysis Analyzing the birthday matching algorithm recitation 上有详细的例子 考虑循环为乘法的基本求和计算，来计算整个函数的运行时间 - running time，用 $O$ 表示上界 可以通过，更换不同的数据结构来简化算法的时间复杂度">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.e5be0b244cfea0385bf04425148e0847f227ebc587eb7cf8ce8e2532d66a9248.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.50b57e12d401420df23965fed157368aba37b76df0ecefd0b1ecd4da664f01a0.css" media="(prefers-color-scheme: dark)"  /><link rel="stylesheet" href="http://localhost:1313/katex/katex.min.css ">
+		<script defer src="http://localhost:1313/katex/katex.min.js"></script>
+		<script defer src="http://localhost:1313/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+		
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+					renderMathInElement(document.body, {
+							delimiters: [
+									{left: "$$", right: "$$", display: true},
+									{left: "$", right: "$", display: false}
+							]
+					});
+			});
+		</script>
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Zhengbo Wang Blog</a>
+	</div>
+	<nav>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">6.006 L01</h1>
+          <div class="meta">Posted on Jan 9, 2025</div>
+        </div>
+        
+        <section class="body">
+          <h2 id="introduction">Introduction</h2>
+<ul>
+<li>Purpose of class
+<ul>
+<li>这门课的目的在于，解决计算问题的同时，要去交流和证明解决办法是正确的、有效的</li>
+<li>包含解决问题，证明正确性，证明有效性，如何用通用术语进行交流
+<ul>
+<li>关于交流的提法，是第一次见到</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Definition of problem and algorithm
+<ul>
+<li>问题是有输入和输出的二元关系
+<ul>
+<li>不要试图去指定所有输入对应的结果，无数的可能是无法枚举的</li>
+<li>这门课通常在讨论一般性的，大数据量输入</li>
+</ul>
+</li>
+<li>算法，在定义的时候，提到了每个输入，都对应一个确定的输出
+<ul>
+<li>或许一个输入有很多正确结果，但是算法就应该类似函数那样，只返回一个
+<ul>
+<li>返回哪个显然与具体算法的过程有关</li>
+</ul>
+</li>
+<li>一个算法，可以被定义为解决问题，就是他能够对问题的每个输入都返回一个正确的输出</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="problem-solving-with-algorithms">Problem Solving with Algorithms</h2>
+<ul>
+<li>Examples of problems and corresponding algorithms
+<ul>
+<li>问题的例子是，班级里面，是否有生日相同的同学</li>
+<li>一个直观的简单算法就是，从一个空的数据开始，不断询问记录每个同学的生日，每当得到一个新的生日，就与已有的生日相互比较，如果相同，则返回当前同学与从数据中找到的另一位同学，否则将当前同学的生日记录，再重复过程。如果问遍了全部的同学，也没有得到相同的生日，就返回空集。
+<ul>
+<li>这个算法，或许计算机因为没有技术细节而无法理解，但是人类应该可以理解并翻译成计算机语言了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Generalization to large input spaces
+<ul>
+<li>general 的含义可以进一步理解为，任意大的输入</li>
+<li>这门课讨论的算法，应该对任意大的输入都有效</li>
+</ul>
+</li>
+</ul>
+<h2 id="correctness-of-algorithms">Correctness of Algorithms</h2>
+<ul>
+<li>Proving algorithm correctness using induction
+<ul>
+<li>对于小数量的输入，自然可以一一验证</li>
+<li>对于任意大小的输入，通常需要递归或者循环来解决问题
+<ul>
+<li>归纳法是证明其正确性的普遍方法</li>
+<li>不赘述归纳法细节，这里与数学上的归纳法基本一致，
+从验证 $k=0$ 开始，假设 $k=k&rsquo;$ 正确，验证 $k=k&rsquo;+1$ 的正确性，进而令 $k\to \infty=n$，一般性得到证明</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="efficiency-of-algorithms"><strong>Efficiency of Algorithms</strong></h2>
+<ul>
+<li>Importance of efficiency
+<ul>
+<li>为了找到更优秀的算法，我们需要对算法运行时间/效率进行比较。</li>
+<li>同一个输入和算法，在不同配置的机器上的运行实际时间是不同的。为了得到任意情况下的，针对问题的高效率算法，显然比较绝对运行时间是不可行的</li>
+<li>所以，我们需要定义一种固定操作 - 这一操作的时间是一定的，然后计算不同算法下所需要不同操作数，作为算法所消耗时间的衡量</li>
+</ul>
+</li>
+<li>Asymptotic Notation
+<ul>
+<li>为了表示不同算法的不同效率，引入渐进符号 - asymptotic notation</li>
+<li>上界 - $O(f(n))$，下界 - $\Omega(f(n))$，紧界 (tight bound) - $\Theta(f(n))$
+<ul>
+<li>思想在于忽略常数和低阶项的影响，只关注最主要的项，具体的定义略去</li>
+<li>上界在是实际中应用更加广泛，其余两个更多用在学术一些、专业一些的场合</li>
+</ul>
+</li>
+<li>有常数 $\Theta(1)$，对数 $\Theta(\log n)$，线性 $\Theta(n)$，对数线性 $\Theta(n\log n)$，
+平方 $\Theta(n^{2})$，多项式 $\Theta(n^c)$，指数 $2^{\Theta(n^c)}$</li>
+<li>在 recitation 中有渐进的计算练习</li>
+</ul>
+</li>
+</ul>
+<h2 id="model-of-computation"><strong>Model of Computation</strong></h2>
+<ul>
+<li>Word-RAM model
+<ul>
+<li>这些主要是为了定义，$O(1)$ 常数复杂度的操作，有 整数运算 -integer arithmetic，逻辑运算 - logical operation，
+字节运算 - bitwise arithmetic 以及读写给定地址的 word。这个理论复杂度，在实际中由于不同硬件等因素会在操作时间上有所区别。</li>
+<li>word 就是是处理器 (processor) 作为单个单元处理的固定大小 (w 个 bit) 的整数，从 ${0,1,\dots,2^w - 1}$，
+例如在 32-bit 系统中就是 32 个 bit/4 个 byte 大小，w 就是 w-bit Word-RAM 的 word size
+<ul>
+<li>bit，就是 01；八个 bit 组成一个 byte，例如 01101000。</li>
+<li>为什么 word size 很重要，因为小的字长可能会限制性能，大的字长可以一次性处理更多的数据，
+这也是 64 位系统相对于 32 位在内存寻址、数据处理等方面的进步。</li>
+</ul>
+</li>
+<li>memory 是为 CPU 的操作提供数据的地方，通常指的是 RAM - Random Access Memory,
+允许 CPU 快速的读取和写入数据，同时也储存 CPU 执行的指令
+<ul>
+<li>内存中的每个 byte 都有一个唯一的 address，以便 CPU 快速定位</li>
+<li>在 32bit 系统中 address 的大小就是 32bit，那么也就可以有 $2^{32}$ (约 40 亿) 种地址表示。
+注意到每个地址指向一个 byte，那么也就是说， 32bit 的系统的
+总的可寻址空间 - addressable memory space 为 4GB - 40 亿个 byte。
+<ul>
+<li>由于其他限制 (系统保留区域或其他架构限制)，这个理论最大值总几乎不可能达到的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Basic operations and memory limits
+<ul>
+<li>输入大小为 $n$ 个 machine word，其应该小于 $2^w$，以保证其每个 word 的地址可以都放入内存中，
+以 $O(1)$ 方式访问，即 $w&gt;\log_{2}n$，其中 $\log_{2}n$ 为最大的地址
+<ul>
+<li>64bit 可寻址空间 $2^{64}$ 个 byte 目前看是足够大的，可以满足这个要求</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="data-structures"><strong>Data Structures</strong></h2>
+<ul>
+<li>Definition and examples
+<ul>
+<li>数据结构，是储存非常量数据 (non-constant data) 的方式，同时支持一些列操作，这些操作的集合被称为接口 - interface</li>
+<li>non-constant / not static 的意思是数据可以被移动、添加和移除等，
+数据结构提供提供了这种动态操作 (dynamic operation) 的能力</li>
+<li>很多数据结构都可以支持同一接口，但是具有不同的性能</li>
+</ul>
+</li>
+<li>Static Array example for birthday matching
+<ul>
+<li>静态数组 - 固定宽度和长度，静态队列接口；python 中的 tuple 是动态数组
+<ul>
+<li><code>StaticArray(n)</code> - 初始化大小为 $n$ 的静态数组，每个元素都是 0 - $\Theta(n)$</li>
+<li><code>StaticArray_get_at(i)</code> - 返回指定位置 $i$ 的元素 - $\Theta(1)$</li>
+<li><code>StaticArray_set_at(i,x)</code> - 将 $x$ 写入位置 $i$- $\Theta(1)$</li>
+<li>之所以 <code>get</code> 和 <code>set</code> 方法是常数时间，是因为这个数组中的每个元素具有固定大小 - 一个 machine word</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="running-time-analysis"><strong>Running Time Analysis</strong></h2>
+<ul>
+<li>Analyzing the birthday matching algorithm
+<ul>
+<li>recitation 上有详细的例子</li>
+<li>考虑循环为乘法的基本求和计算，来计算整个函数的运行时间 - running time，用 $O$ 表示上界</li>
+<li>可以通过，更换不同的数据结构来简化算法的时间复杂度</li>
+</ul>
+</li>
+</ul>
+
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>
