@@ -1,5 +1,5 @@
 baseURL = 'https://luke396.github.io/blog/'
-languageCode = 'zh-cn'
+languageCode = 'en-us'
 title = 'Zhengbo Wang Blog'
 theme = "archie"
 
