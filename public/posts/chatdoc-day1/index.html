@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html><head lang="en">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Chatdoc Day1 - Zhengbo Wang Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="
+本来的计划，是与类似 OpenWebUI 等网页对话 &#43; Copilot 进行合作，通过网页对话制定计划，再阅读框架和文档去实现具体代码。
+
+现在可能与计划有些出入，因为 Cline 的出现，虽然我仍然对于让 LLM coding agent 完全写出代码抱有怀疑，但从它写的 demo 入手，或许是个更 &ldquo;AI 时代 &quot; 的选择
+Cline
+首先是 Cline 的设置，由于 Deepseek 无论是硅基流动的，还是官方的 API 都不是很稳定，可以利用 Copilot 的 claude-3-5。
+
+这里的担忧是，会不会过分地请求 Copilot 导致被 GitHub 警告，因为这个问题曾经在 avanate-nvim 中出现。我记不清在具体什么位置，看到了一个大概 1M/hour 的限制。
+接着稍微读了一下 Cline 的文档，觉得最重要的是设置 memory bank，就是利用 cline_docs/ 下的一系列文件和 自定义的 prompt 让 Cline 可以跟踪项目的进度，并更新。
+
+我把这个 memory 排除在了 git 之外，总归还是有点私密的
+有一点疑问就是，这些 memory 的最佳实践，是否需要手动更改，还是更推荐让 Cline 全程自助处理。
+另一个，应该可能有所发挥，但我目前还没找到合适场景的，是 .clinerules，类似 cursor 的配置文件，也提供了 模板，可能更具体的实践用法，还需要未来探索。
+项目详情
+已经生成了 memory 和初步的框架，具体写在明天。
+
+虽然是懒惰的程度居多，但强行辩解就是，为了明天开始写 Day2 留一个开头，让这个工作流滚动起来。" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="https://luke396.github.io/blog/posts/chatdoc-day1/">
+  <meta property="og:site_name" content="Zhengbo Wang Blog">
+  <meta property="og:title" content="Chatdoc Day1">
+  <meta property="og:description" content="本来的计划，是与类似 OpenWebUI 等网页对话 &#43; Copilot 进行合作，通过网页对话制定计划，再阅读框架和文档去实现具体代码。
+现在可能与计划有些出入，因为 Cline 的出现，虽然我仍然对于让 LLM coding agent 完全写出代码抱有怀疑，但从它写的 demo 入手，或许是个更 “AI 时代 &#34; 的选择
+Cline 首先是 Cline 的设置，由于 Deepseek 无论是硅基流动的，还是官方的 API 都不是很稳定，可以利用 Copilot 的 claude-3-5。
+这里的担忧是，会不会过分地请求 Copilot 导致被 GitHub 警告，因为这个问题曾经在 avanate-nvim 中出现。我记不清在具体什么位置，看到了一个大概 1M/hour 的限制。
+接着稍微读了一下 Cline 的文档，觉得最重要的是设置 memory bank，就是利用 cline_docs/ 下的一系列文件和 自定义的 prompt 让 Cline 可以跟踪项目的进度，并更新。
+我把这个 memory 排除在了 git 之外，总归还是有点私密的
+有一点疑问就是，这些 memory 的最佳实践，是否需要手动更改，还是更推荐让 Cline 全程自助处理。
+另一个，应该可能有所发挥，但我目前还没找到合适场景的，是 .clinerules，类似 cursor 的配置文件，也提供了 模板，可能更具体的实践用法，还需要未来探索。
+项目详情 已经生成了 memory 和初步的框架，具体写在明天。
+虽然是懒惰的程度居多，但强行辩解就是，为了明天开始写 Day2 留一个开头，让这个工作流滚动起来。">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-04T20:54:17+08:00">
+    <meta property="article:modified_time" content="2025-02-04T20:54:17+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Chatdoc Day1">
+  <meta name="twitter:description" content="本来的计划，是与类似 OpenWebUI 等网页对话 &#43; Copilot 进行合作，通过网页对话制定计划，再阅读框架和文档去实现具体代码。
+现在可能与计划有些出入，因为 Cline 的出现，虽然我仍然对于让 LLM coding agent 完全写出代码抱有怀疑，但从它写的 demo 入手，或许是个更 “AI 时代 &#34; 的选择
+Cline 首先是 Cline 的设置，由于 Deepseek 无论是硅基流动的，还是官方的 API 都不是很稳定，可以利用 Copilot 的 claude-3-5。
+这里的担忧是，会不会过分地请求 Copilot 导致被 GitHub 警告，因为这个问题曾经在 avanate-nvim 中出现。我记不清在具体什么位置，看到了一个大概 1M/hour 的限制。
+接着稍微读了一下 Cline 的文档，觉得最重要的是设置 memory bank，就是利用 cline_docs/ 下的一系列文件和 自定义的 prompt 让 Cline 可以跟踪项目的进度，并更新。
+我把这个 memory 排除在了 git 之外，总归还是有点私密的
+有一点疑问就是，这些 memory 的最佳实践，是否需要手动更改，还是更推荐让 Cline 全程自助处理。
+另一个，应该可能有所发挥，但我目前还没找到合适场景的，是 .clinerules，类似 cursor 的配置文件，也提供了 模板，可能更具体的实践用法，还需要未来探索。
+项目详情 已经生成了 memory 和初步的框架，具体写在明天。
+虽然是懒惰的程度居多，但强行辩解就是，为了明天开始写 Day2 留一个开头，让这个工作流滚动起来。">
+
+        <link href="https://luke396.github.io/blog/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="https://luke396.github.io/blog/css/main.e5be0b244cfea0385bf04425148e0847f227ebc587eb7cf8ce8e2532d66a9248.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://luke396.github.io/blog/css/dark.50b57e12d401420df23965fed157368aba37b76df0ecefd0b1ecd4da664f01a0.css" media="(prefers-color-scheme: dark)"  /><link rel="stylesheet" href="https://luke396.github.io/blog/katex/katex.min.css ">
+		<script defer src="https://luke396.github.io/blog/katex/katex.min.js"></script>
+		<script defer src="https://luke396.github.io/blog/katex/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+		
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+					renderMathInElement(document.body, {
+							delimiters: [
+									{left: "$$", right: "$$", display: true},
+									{left: "$", right: "$", display: false}
+							]
+					});
+			});
+		</script>
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://luke396.github.io/">Zhengbo Wang Blog</a>
+	</div>
+	<nav>
+		
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">Chatdoc Day1</h1>
+          <div class="meta">Posted on Feb 4, 2025</div>
+        </div>
+        
+        <section class="body">
+          <blockquote>
+<p>本来的计划，是与类似 OpenWebUI 等网页对话 + Copilot 进行合作，通过网页对话制定计划，再阅读框架和文档去实现具体代码。</p></blockquote>
+<blockquote>
+<p>现在可能与计划有些出入，因为 <a href="https://github.com/cline/cline">Cline</a> 的出现，虽然我仍然对于让 LLM coding agent 完全写出代码抱有怀疑，但从它写的 demo 入手，或许是个更 &ldquo;AI 时代 &quot; 的选择</p></blockquote>
+<h2 id="cline">Cline</h2>
+<p>首先是 Cline 的设置，由于 Deepseek 无论是硅基流动的，还是官方的 API 都不是很稳定，可以利用 Copilot 的 claude-3-5。</p>
+<blockquote>
+<p>这里的担忧是，会不会过分地请求 Copilot 导致被 GitHub 警告，因为这个问题曾经在 <a href="https://github.com/yetone/avante.nvim">avanate-nvim</a> 中出现。我记不清在具体什么位置，看到了一个大概 1M/hour 的限制。</p></blockquote>
+<p>接着稍微读了一下 Cline 的文档，觉得最重要的是设置 <a href="https://docs.cline.bot/improving-your-prompting-skills/custom-instructions-library/cline-memory-bank">memory bank</a>，就是利用 <code>cline_docs/</code> 下的一系列文件和 <a href="https://docs.cline.bot/improving-your-prompting-skills/custom-instructions-library/cline-memory-bank#id-4.-custom-instructions">自定义的 prompt</a> 让 Cline 可以跟踪项目的进度，并更新。</p>
+<blockquote>
+<p>我把这个 memory 排除在了 git 之外，总归还是有点私密的</p></blockquote>
+<p><strong>有一点疑问就是，这些 memory 的最佳实践，是否需要手动更改，还是更推荐让 Cline 全程自助处理。</strong></p>
+<p>另一个，应该可能有所发挥，但我目前还没找到合适场景的，是 <code>.clinerules</code>，类似 cursor 的配置文件，也提供了 <a href="https://docs.cline.bot/getting-started/getting-started-new-coders/our-favorite-tech-stack#clinerules-template">模板</a>，可能更具体的实践用法，还需要未来探索。</p>
+<h2 id="项目详情">项目详情</h2>
+<p>已经生成了 memory 和初步的框架，具体写在明天。</p>
+<blockquote>
+<p>虽然是懒惰的程度居多，但强行辩解就是，为了明天开始写 Day2 留一个开头，让这个工作流滚动起来。</p></blockquote>
+
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+
+
+</div>
+    </body>
+</html>
