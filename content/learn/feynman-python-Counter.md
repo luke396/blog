@@ -2,6 +2,7 @@
 date = '2025-02-10T13:50:19+08:00'
 draft = true
 title = 'Feynman Python Counter'
+tags = ['python', 'feynman']
 +++
 
 **哪些是人话，哪些是 AI 的输出，应该是不言自明的。**

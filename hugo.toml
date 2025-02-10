@@ -1,8 +1,35 @@
 baseURL = 'https://luke396.github.io/blog/'
-languageCode = 'en-us'
 title = 'Zhengbo Wang Blog'
-theme = "archie"
+theme = "hugo-coder"
+languagecode = "zh-CN"
+defaultcontentlanguage = "zh"
 
 [params]
-mode = "auto"
-katex = true  # enable KaTeX support
+author = "Zhengbo Wang"
+description = "Zhengbo Wang's personal blog"
+keywords = "blog,developer,personal"
+colorScheme = "auto"
+katex = true
+
+# Social links
+[[params.social]]
+name = "Github"
+icon = "fa fa-github fa-2x"
+weight = 1
+url = "https://github.com/luke396/"
+
+[taxonomies]
+category = "categories"
+series = "series"
+tag = "tags"
+author = "authors"
+
+# Menu links
+[[menu.main]]
+name = "Blog"
+weight = 1
+url = "posts/"
+[[menu.main]]
+name = "Learn"
+weight = 2
+url = "learn/"
