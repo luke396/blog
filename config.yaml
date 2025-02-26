@@ -1,0 +1,128 @@
+baseURL: "https://luke396.github.io/"
+title: "Luke's Blog"
+theme: PaperMod
+languageCode: "zh-CN"
+
+pagination:
+  pagerSize: 10
+
+enableInlineShortcodes: true
+hasCJKLanguage: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+pygmentsUseClasses: true
+mainsections: ["posts", "learn", "project"]
+defaultContentLanguage: "zh"
+defaultContentLanguageInSubdir: false
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+languages:
+  zh:
+    languageName: "中文"
+    weight: 1
+    taxonomies:
+      category: categories
+      tag: tags
+      series: series
+    menu:
+      main:
+        - name: Archive
+          url: archives/
+          weight: 5
+        - name: Learn
+          url: learn/
+          weight: 10
+        - name: Project
+          url: project/
+          weight: 15
+        - name: Categories
+          url: categories/
+          weight: 20
+        - name: Tags
+          url: tags/
+          weight: 30
+        - name: Search
+          url: search/
+          weight: 40
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  env: production
+  title: "Luke's Blog"
+  description: "Luke's Personal Blog - Learning and Projects"
+  author: Luke
+
+  defaultTheme: auto
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  displayFullLangName: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowAllPagesInArchive: true
+  ShowWordCount: true
+  ShowPageNums: true
+  ShowToc: true
+  comments: false
+  TocOpen: false
+
+  math: true
+  mathAutoRender: true
+
+  homeInfoParams:
+    Title: "Welcome to ZhengBo Wang's Blog 👋"
+    Content: >
+      - 您好
+
+      - 这是我的个人博客，分享我的学习笔记和项目经验
+
+      - 主要关注编程、算法和人工智能等话题
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/luke396"
+    - name: email
+      url: "mailto:lw7205675@gmail.com"
+
+  editPost:
+    URL: "https://github.com/luke396/blog/content"
+    Text: "编辑此页"
+    appendFilePath: true
+
+  assets:
+    disableHLJS: true
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: ["title", "permalink", "summary", "content"]
+    includeMatches: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+      html:
+        escapeHTML: false
+        unsafeProtocol: true
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    style: dracula
