@@ -1,9 +1,11 @@
-+++
-date = '2025-02-04T20:54:17+08:00'
-draft = false
-title = 'Chatdoc Day1'
-tags = ['chatdoc',]
-+++
+---
+title: "Chatdoc Day1"
+date: "2025-02-04T20:54:17+08:00"
+draft: false
+categories: ["project", "chatdoc"]
+tags: ["AI", "Cline", "Copilot"]
+series: ["Chatdoc"]
+---
 
 > 本来的计划，是与类似 OpenWebUI 等网页对话 + Copilot 进行合作，通过网页对话制定计划，再阅读框架和文档去实现具体代码。
 
