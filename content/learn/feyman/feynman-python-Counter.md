@@ -1,17 +1,23 @@
 ---
-date: "2025-02-10T13:50:19+08:00"
-draft: false
 title: "Feynman Python Counter"
+date: "2025-02-10T13:50:19+08:00"
+lastmod: "2025-02-10T13:50:19+08:00"
+draft: false
+description: "使用费曼学习法深入理解Python的Counter类，包含实例代码和详细解释"
+slug: ""
 categories: ["learn"]
-tags: ["python", "feynman", "counter"]
+tags: ["python", "feynman", "counter", "数据结构"]
 series: "Feynman"
+keywords: ["Python", "Counter", "集合", "数据结构", "算法", "费曼学习法"]
 ---
 
-**哪些是人话，哪些是 AI 的输出，应该是不言自明的。**
+这篇文章采用与 AI 问答的形式。。基于费曼学习法示了 Python Counter 类的核心概念和使用技巧。
+
+<!--more-->
 
 > prompt: 我正在学习数据结构与算法， 其中用到了 python 的 counter 类，这是我第一次接触，请你和我一起利用费曼学习法进行学习，问我一些问题以加深理解
 
-**问题 1**: 如果需要统计一段文本中每个单词出现的次数，用普通的 Python 字典手动实现大概步骤是怎样的？Counter 是如何简化这个过程的？
+## 如果需要统计一段文本中每个单词出现的次数，用普通的 Python 字典手动实现大概步骤是怎样的？Counter 是如何简化这个过程的？
 
 ```python
 # Q1
@@ -19,7 +25,7 @@ series: "Feynman"
 text = "This is a sentence. And this is another sentence. This is the third sentence."
 cnt_dict = {}
 for c in text.split():
-    cnt_dict[c] = cnt_dict.get(c, 0) + 1
+    cnt_dict[c] = cnt_dict.get(c, 0) + 1
 print(cnt_dict)
 # Count the number of sentences in the string using counter class
 cnt_counter = Counter(text.split())
@@ -49,7 +55,7 @@ cnt_counter = Counter(text.split())
 
 ---
 
-**问题 2**: 当用 `from collections import Counter` 后，想创建一个计数器来统计 `["apple", "banana", "apple", "orange"]` 的元素出现次数，代码应该怎么写？此时直接打印这个 Counter 对象会输出什么？
+## 当用 `from collections import Counter` 后，想创建一个计数器来统计 `["apple", "banana", "apple", "orange"]` 的元素出现次数，代码应该怎么写？此时直接打印这个 Counter 对象会输出什么？
 
 ```python
 # Q2
@@ -60,7 +66,7 @@ print(cnt)
 
 ---
 
-**问题 3**: 如果我有一个计数器 `c = Counter(a=3, b=2)`，当访问 `c["c"]` 时会发生什么错误吗？为什么这与普通字典不同？如何安全地获取一个可能不存在元素的计数？
+## 如果我有一个计数器 `c = Counter(a=3, b=2)`，当访问 `c["c"]` 时会发生什么错误吗？为什么这与普通字典不同？如何安全地获取一个可能不存在元素的计数？
 
 ```python
 # Q3
@@ -76,7 +82,7 @@ print(c["c"])  # not KeyError, just return 0
 
 ---
 
-**问题 4**: 假设已经创建了计数器 `word_counts = Counter(text.split())`，现想获取出现频率最高的前 2 个单词，应该调用什么方法？返回的数据结构是怎样的？
+## 假设已经创建了计数器 `word_counts = Counter(text.split())`，现想获取出现频率最高的前 2 个单词，应该调用什么方法？返回的数据结构是怎样的？
 
 ```python
 # Q4
@@ -100,7 +106,7 @@ print(
 
 ---
 
-**问题 5**: 当调用 `counter.elements()` 方法时，返回的是什么样的迭代器？比如对于 `Counter(a=2, b=3)`，`list(elements())` 的结果是什么？
+## 当调用 `counter.elements()` 方法时，返回的是什么样的迭代器？比如对于 `Counter(a=2, b=3)`，`list(elements())` 的结果是什么？
 
 ```python
 # Q5
@@ -125,7 +131,7 @@ print(
 
 ---
 
-**问题 6**: 如何合并两个 Counter 对象（例如 `c1 = Counter(a=3)` 和 `c2 = Counter(a=2, b=5)`），使其合并后的计数器是将对应键的值相加？如果要做值相减呢？（提示：`+` 和 `-` 运算符的作用）
+## 如何合并两个 Counter 对象（例如 `c1 = Counter(a=3)` 和 `c2 = Counter(a=2, b=5)`），使其合并后的计数器是将对应键的值相加？如果要做值相减呢？（提示：`+` 和 `-` 运算符的作用）
 
 ```python
 # Q6
@@ -166,7 +172,7 @@ print(c["a"])  # 输出 -2
 
 ---
 
-**问题 7**: 如果想把 Counter 转换为一个普通字典，有哪些方法？哪种转换方式会保留计数值为 0 的元素？
+## 如果想把 Counter 转换为一个普通字典，有哪些方法？哪种转换方式会保留计数值为 0 的元素？
 
 ```python
 # Q7
@@ -191,7 +197,7 @@ print(dict(cnt))
 
 ---
 
-**问题 8**: 在处理计数时，`counter.update()` 和直接使用 `counter = counter1 + counter2` 的主要区别是什么？哪个会修改原对象，哪个创建新对象？
+## 在处理计数时，`counter.update()` 和直接使用 `counter = counter1 + counter2` 的主要区别是什么？哪个会修改原对象，哪个创建新对象？
 
 ```python
 # Q8
@@ -236,7 +242,7 @@ c = c + other  # 原 c 引用对象可能未被立即释放
 
 ---
 
-**问题 9**: Counter 对象有个令人惊讶的特性：若将某个键的计数设置为 0，该键会 "xxxx"；如果想彻底删除这个键需要用 xxx 方法。（试过实际代码吗？）
+## Counter 对象有个令人惊讶的特性：若将某个键的计数设置为 0，该键会 "保留"；如果想彻底删除这个键需要用 del 方法。（试过实际代码吗？）
 
 ```python
 # Q9
@@ -258,7 +264,7 @@ print({"a": 3, "b": 2, "c": 0})
 
 ---
 
-**问题 10**: 在哪些算法场景（例如力扣题目）中使用 Counter 会明显比手动统计更高效？你能想到至少两个具体应用场景吗？
+## 在哪些算法场景（例如力扣题目）中使用 Counter 会明显比手动统计更高效？你能想到至少两个具体应用场景吗？
 
 ```
 counter in LeetCode, such as Q904 and Q76, sliding window and counter

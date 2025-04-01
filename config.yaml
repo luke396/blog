@@ -1,10 +1,10 @@
 baseURL: "https://luke396.github.io/"
-title: "Luke's Blog"
-theme: PaperMod
-languageCode: "zh-CN"
-
+title: "Zhengbo Wang's Blog"
 pagination:
   pagerSize: 10
+theme: PaperMod
+languageCode: "zh-CN"
+copyright: "© 2025 Zhengbo Wang"
 
 enableInlineShortcodes: true
 hasCJKLanguage: true
@@ -47,6 +47,9 @@ languages:
         - name: Tags
           url: tags/
           weight: 30
+        - name: Series
+          url: series/
+          weight: 35
         - name: Search
           url: search/
           weight: 40
@@ -61,7 +64,11 @@ params:
   env: production
   title: "Luke's Blog"
   description: "Luke's Personal Blog - Learning and Projects"
-  author: Luke
+  keywords: ["Blog", "Programming", "Algorithm", "AI", "Learning"]
+  author: "Zhengbo Wang"
+  images: ["profile.jpg"]
+
+  dateFormat: "2006-01-02"
 
   defaultTheme: auto
   disableThemeToggle: false
@@ -76,14 +83,20 @@ params:
   ShowWordCount: true
   ShowPageNums: true
   ShowToc: true
-  comments: false
-  TocOpen: false
+  TocOpen: true
 
+  # 添加评论系统支持（已禁用，但保留配置）
+  comments: false
+  # 可以根据需要启用特定评论系统
+  # disqusShortname: ""
+  # utterancesRepo: ""
+
+  # 使用数学排版，支持KaTeX
   math: true
   mathAutoRender: true
 
   homeInfoParams:
-    Title: "Welcome to ZhengBo Wang's Blog 👋"
+    Title: "Welcome to Zhengbo Wang's Blog 👋"
     Content: >
       - 您好
 
@@ -96,14 +109,21 @@ params:
       url: "https://github.com/luke396"
     - name: email
       url: "mailto:lw7205675@gmail.com"
+    # 可以添加更多社交媒体链接
+    # - name: linkedin
+    #   url: "https://linkedin.com/in/yourprofile"
 
   editPost:
-    URL: "https://github.com/luke396/blog/content"
+    URL: "https://github.com/luke396/blog/tree/main/content"
     Text: "编辑此页"
     appendFilePath: true
 
   assets:
     disableHLJS: true
+    favicon: "/favicon.ico"
+    favicon16x16: "/favicon-16x16.png"
+    favicon32x32: "/favicon-32x32.png"
+    apple_touch_icon: "/apple-touch-icon.png"
 
   fuseOpts:
     isCaseSensitive: false
@@ -115,14 +135,22 @@ params:
     keys: ["title", "permalink", "summary", "content"]
     includeMatches: true
 
+  # 添加自定义头部
+  profileMode:
+    enabled: false
+
+  # 添加谷歌分析（如需使用）
+  # analytics:
+  #   google:
+  #     SiteVerificationTag: ""
+
 markup:
   goldmark:
     renderer:
       unsafe: true
-      html:
-        escapeHTML: false
-        unsafeProtocol: true
   highlight:
     codeFences: true
     guessSyntax: true
+    lineNos: false
     style: dracula
+    lineNumbersInTable: true
