@@ -1,11 +1,19 @@
 ---
 title: "Chatdoc Day1"
 date: "2025-02-04T20:54:17+08:00"
-draft: false
+lastmod: "2025-02-04T20:54:17+08:00"
+draft: true
+description: "Chatdoc项目第一天的开发日志，包含项目设置和初步规划"
+slug: ""
 categories: ["project", "chatdoc"]
-tags: ["AI", "Cline", "Copilot"]
-series: ["Chatdoc"]
+tags: ["AI", "Cline", "Copilot", "开发日志"]
+series: "Chatdoc"
+keywords: ["Chatdoc", "Cline", "AI编程", "AI开发助手", "Copilot"]
 ---
+
+Chatdoc 是一个使用 AI 辅助开发的文档对话工具，这篇文章记录了项目的启动阶段
+
+<!--more-->
 
 > 本来的计划，是与类似 OpenWebUI 等网页对话 + Copilot 进行合作，通过网页对话制定计划，再阅读框架和文档去实现具体代码。
 

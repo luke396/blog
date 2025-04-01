@@ -1,7 +1,85 @@
+{{- /* Reading Progress Bar */ -}}
+<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+
+{{- /* Optimized script with defer attribute and better performance */ -}}
+<script defer>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Cache DOM elements
+    const progressBar = document.getElementById("reading-progress-bar");
+    const backToTop = document.getElementById("back-to-top"); // 使用已有的按钮，不再创建新按钮
+    let scrolling = false;
+    let lastKnownScrollPosition = 0;
+
+    // Performance optimized progress calculation using requestAnimationFrame
+    function updateProgress() {
+      if (!scrolling) return;
+
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const progress = height > 0 ? (scrollTop / height) * 100 : 0;
+
+      // Update progress bar width
+      progressBar.style.width = `${progress}%`;
+
+      // Update back-to-top button visibility with a threshold
+      if (backToTop && scrollTop > 300) {
+        backToTop.classList.add("visible");
+      } else if (backToTop) {
+        backToTop.classList.remove("visible");
+      }
+
+      scrolling = false;
+    }
+
+    // Throttled scroll handler using requestAnimationFrame for better performance
+    function onScroll() {
+      lastKnownScrollPosition = window.scrollY;
+      if (!scrolling) {
+        scrolling = true;
+        window.requestAnimationFrame(updateProgress);
+      }
+    }
+
+    // Modern passive event listener for better scrolling performance
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // 如果找到已存在的回到顶部按钮，添加平滑滚动功能
+    if (backToTop) {
+      backToTop.addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    }
+
+    // Initial update
+    setTimeout(updateProgress, 100);
+  });
+</script>
+
+{{- /* Font loading with preload for better performance */ -}}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
-  rel="stylesheet"
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
 />
-{{ if or .Params.math .Site.Params.math }} {{ partial "math.html" . }} {{ end }}
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+  />
+</noscript>
+
+{{- /* Load math support conditionally */ -}} {{ if or .Params.math
+.Site.Params.math }} {{ partial "math.html" . }} {{ end }}

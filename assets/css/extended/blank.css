@@ -1,8 +1,275 @@
+/* Advanced Typography and Layout Enhancements for Hugo PaperMod Theme */
+
+/* Code font enhancements */
 .post-content pre,
 code {
   font-family: "JetBrains Mono", monospace;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  font-feature-settings: "liga" 0; /* Disable ligatures for better code readability */
+}
 
-  font-size: 1rem;
+/* Global style variables for better consistency */
+:root {
+  --content-gap: 20px;
+  --radius-small: 4px;
+  --radius-medium: 6px;
+  --radius-large: 8px;
+  --animation-duration: 0.3s;
 
-  line-height: 1.2;
+  /* Semantic color naming */
+  --tag-bg-color: rgba(23, 81, 153, 0.15);
+  --tag-hover-bg-color: rgba(23, 81, 153, 0.25);
+  --series-bg-color: rgba(140, 67, 166, 0.15);
+  --series-hover-bg-color: rgba(140, 67, 166, 0.25);
+  --category-bg-color: rgba(50, 115, 80, 0.15);
+  --category-hover-bg-color: rgba(50, 115, 80, 0.25);
+
+  /* Progress bar colors */
+  --progress-gradient-start: #6b63ff;
+  --progress-gradient-end: #a16fff;
+}
+
+/* Taxonomy styling (tags, categories, series) with improved accessibility */
+.post-tags a,
+.post-categories a,
+.post-series a {
+  border-radius: var(--radius-medium);
+  padding: 4px 10px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all var(--animation-duration) ease;
+  display: inline-block;
+}
+
+.post-tags a {
+  background-color: var(--tag-bg-color);
+}
+
+.post-categories a {
+  background-color: var(--category-bg-color);
+}
+
+.post-series a {
+  background-color: var(--series-bg-color);
+}
+
+.post-tags a:hover,
+.post-categories a:hover,
+.post-series a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-tags a:hover {
+  background-color: var(--tag-hover-bg-color);
+}
+
+.post-categories a:hover {
+  background-color: var(--category-hover-bg-color);
+}
+
+.post-series a:hover {
+  background-color: var(--series-hover-bg-color);
+}
+
+/* Content type badges with improved positioning and accessibility */
+.post-entry[data-categories*="learn"]::before {
+  content: "学习笔记";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #175199;
+  color: white;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  border-radius: var(--radius-small);
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.post-entry[data-categories*="project"]::before {
+  content: "项目日志";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #8c43a6;
+  color: white;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  border-radius: var(--radius-small);
+  opacity: 0.9;
+  z-index: 1;
+}
+
+/* Blockquote styling with semantic borders and improved spacing */
+blockquote {
+  border-left: 4px solid #6b63ff;
+  background-color: rgba(107, 99, 255, 0.05);
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+}
+
+/* Code block enhancements */
+pre {
+  border-radius: var(--radius-large);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.2em;
+  margin: 1.5em 0;
+}
+
+/* Table of contents improvements */
+.toc {
+  background-color: var(--theme);
+  border-radius: var(--radius-large);
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 1.5em 0;
+}
+
+.toc details summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 10px;
+  user-select: none;
+}
+
+.toc .inner ul {
+  padding-left: 1.2em;
+  margin-top: 0.5em;
+}
+
+.toc .inner li {
+  margin-bottom: 0.4em;
+  line-height: 1.4;
+}
+
+.toc .inner a {
+  color: var(--content);
+  font-size: 0.95rem;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.toc .inner a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Reading progress bar with improved UX */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+#reading-progress-bar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--progress-gradient-start),
+    var(--progress-gradient-end)
+  );
+  width: 0%;
+  transition: width 0.2s ease;
+  min-width: 0;
+  border: none;
+}
+
+#reading-progress-bar::before,
+#reading-progress-bar::after {
+  display: none;
+  content: none;
+}
+
+/* Back to top button styling */
+#back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: var(--theme);
+  color: var(--primary);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 99;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#back-to-top:hover {
+  background: var(--primary);
+  color: var(--theme);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .post-content pre,
+  code {
+    font-size: 0.9rem;
+  }
+
+  #back-to-top {
+    width: 40px;
+    height: 40px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .toc {
+    padding: 15px;
+  }
+}
+
+/* Print styles */
+@media print {
+  #reading-progress,
+  #back-to-top {
+    display: none !important;
+  }
+
+  .post-tags a,
+  .post-categories a,
+  .post-series a {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  pre {
+    box-shadow: none;
+    border: 1px solid #eee;
+  }
+}
+
+/* Dark mode specific adjustments */
+.dark .toc {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark #back-to-top {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.dark blockquote {
+  background-color: rgba(107, 99, 255, 0.07);
 }
