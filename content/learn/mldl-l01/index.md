@@ -1,7 +1,7 @@
 ---
 title: "Hylee MLDL 2021 L01"
 date: "2025-04-14T19:02:45+08:00"
-lastmod: "2025-04-14T19:02:45+08:00"
+lastmod: "2025-04-18T15:35:34+08:00"
 draft: false
 categories: ["learn", "mldl", "hylee"]
 tags:
@@ -12,6 +12,7 @@ tags:
     "gradient descent",
     "sigmoid",
     "relu",
+    "backpropagation",
   ]
 series: "hylee mldl 2021"
 
@@ -24,6 +25,7 @@ keywords:
     "gradient descent",
     "sigmoid",
     "relu",
+    "backpropagation",
   ]
 ---
 
@@ -127,8 +129,42 @@ Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数
 
 课上利用实际的例子，发现在 4 层的时候，虽然训练 loss 有所降低，但是 test loss 反而比 3 层有所增加，这就引入了 overfitting 的概念。
 
+## Backpropagation
+
+神经网络结构下，因为有海量的参数，梯度的维度是非常大的。 backpropagation 就是高效计算梯度的方法。
+
+链式法则的复习见下图：
+
+![](l01-20250418141524716.png)
+
+如果用 $C^n$ 表示 $y^n$ 与 $\hat{y}^n$ 之间的误差，那么 $L(\theta)=\sum_{n=1}^{N} C^n(\theta)$，通过链式法则进而有 $\frac{ \partial L(\theta) }{ \partial w }=\sum_{n=1}^{N} \frac{ \partial C^n(\theta) }{ \partial w }$。
+
+![](l01-20250418142209152.png)
+
+其中 $\frac{ \partial z }{ \partial w_{1} }=x_{1}, \frac{ \partial z }{ \partial w_{2} }=x_{2}$，其结果就是 $x$，计算起来是十分容易的，是我们对应 $w$ 的输入，所以 forward pass 是简单和容易理解的，具体有下图。
+
+![](l01-20250418144101086.png)
+
+到了 backward pass $\frac{ \partial C }{ \partial z }$，问题就变得有些复杂。同样可以根据链式法则，进行拆分得到 $\frac{ \partial C }{ \partial z }=\frac{ \partial a }{ \partial z }\frac{ \partial C }{ \partial a }$。同时，$a=\sigma(z), \frac{ \partial a }{ \partial z }=\sigma'(z)$。问题就简化为如何计算 $\frac{ \partial C }{ \partial a }$。通过看图，发现 z 是通过 $z',z''$ 和后续一系列对 $C$ 进行影响（这里假定只有两项，其实不一定）。**不妨假设 $\frac{ \partial C }{ \partial z' }, \frac{ \partial C }{ \partial z'' }$ 已知**，那么 $\frac{ \partial C }{ \partial a }=\frac{ \partial z' }{ \partial a }\frac{ \partial C }{ \partial z'} + \frac{ \partial z'' }{ \partial a }\frac{ \partial C }{ \partial z'' }=w_{3}\frac{ \partial C }{ \partial z' }+w_{4}\frac{ \partial C }{ \partial z'' }$。故 $\frac{ \partial C }{ \partial z }=\sigma'(z)[w_{3}\frac{ \partial C }{ \partial z' }+w_{4}\frac{ \partial C }{ \partial z'' }]$
+
+![](l01-20250418144639803.png)
+
+我们可以吧 backward pass 看作是一个反向传播的神经网络，其中 $\frac{ \partial C }{ \partial z'}, \frac{ \partial C }{ \partial z''}$ 已知，乘上 $w$ 再通过 $\sigma'(z)$。这里注意，$\sigma'(z)$ 是个常数，因为 $z$ 已经在前向传播中，计算得到。故这个神经元其实就是个常数乘法放大因子。所有的问题，到这里就剩如何计算 $\frac{ \partial C }{ \partial z'}, \frac{ \partial C }{ \partial z''}$。
+
+![](l01-20250418145800439.png)
+
+不妨假设，$z', z''$ 通过激活函数之后，已经输出了结果 $y_{1},y_{2}$。那么此时，计算 $\frac{ \partial C }{ \partial z' }=\frac{ \partial y }{ \partial z' }\frac{ \partial C }{ \partial y_{1} }$ 就变得可能，其中 $\frac{ \partial y }{ \partial z' }$ 取决于激活函数，$\frac{ \partial C }{ \partial y_{1} }$ 取决于误差形式的设定，这也是可以简单计算得到的，$\frac{ \partial C }{ \partial z'' }$ 同理。那么只要我们从后向前，真的从 $y_{1},y_{2}$ 对应的 $\frac{ \partial C }{ \partial z_{i}}$ 开始计算，再逐步往前传播，如下图。想象是从后向前算的一个新的神经网络，其中激活函数是 $\sigma'(z)$ 为常数。这样就可以计算得到我们想要的任意位置的 $\frac{ \partial C }{ \partial z }$。这就是 backward pass。
+
+![](l01-20250418151507212.png)
+
+总结一下，当我们想计算损失函数对权重的偏微分 $\frac{ \partial C }{ \partial w }$ 用于梯度下降更新，就可以先 forwa pass 计算任意位置的 $\frac{ \partial z_{i} }{ \partial w_{i} }$，然后再反向计算一遍任意位置的 $\frac{ \partial C }{ \partial z_{i} }$，这样就可以通过链式法则得到 $\frac{ \partial C }{ \partial w }=\frac{ \partial z_{i} }{ \partial w_{i} }\frac{ \partial C }{ \partial z_{i} }$，这就是 backpropagation。
+
+![](l01-20250418152122305.png)
+
 ## Reference
 
 <https://www.youtube.com/watch?v=Ye018rCVvOo&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J>
 
 <https://www.youtube.com/watch?v=bHcJCp2Fyxs&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J&index=2>
+
+<https://www.youtube.com/watch?v=ibJpTrp5mcE>
