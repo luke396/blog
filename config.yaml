@@ -1,4 +1,4 @@
-baseURL: "https://luke396.github.io/"
+baseURL: "https://lukewzb.site"
 title: "Zhengbo Wang's Blog"
 pagination:
   pagerSize: 10
@@ -15,15 +15,17 @@ buildExpired: false
 enableEmoji: true
 pygmentsUseClasses: true
 mainsections: ["posts", "learn", "project"]
-defaultContentLanguage: "zh"
+defaultContentLanguage: "zh-CN"
 defaultContentLanguageInSubdir: false
+canonifyURLs: true
+rssLimit: 20
 
 minify:
   disableXML: true
   minifyOutput: true
 
 languages:
-  zh:
+  zh-CN:
     languageName: "中文"
     weight: 1
     taxonomies:
@@ -32,27 +34,25 @@ languages:
       series: series
     menu:
       main:
-        - name: Archive
-          url: archives/
-          weight: 5
         - name: Learn
           url: learn/
           weight: 10
         - name: Project
           url: project/
-          weight: 15
-        - name: Categories
-          url: categories/
           weight: 20
-        - name: Tags
-          url: tags/
-          weight: 30
         - name: Series
           url: series/
-          weight: 35
+          weight: 30
+        - name: Archive
+          url: archives/
+          weight: 40
         - name: Search
           url: search/
-          weight: 40
+          weight: 50
+
+sitemap:
+  changefreq: weekly
+  priority: 0.5
 
 outputs:
   home:
@@ -62,8 +62,7 @@ outputs:
 
 params:
   env: production
-  title: "Luke's Blog"
-  description: "Luke's Personal Blog - Learning and Projects"
+  description: "一个专注于技术与生活的博客。"
   keywords: ["Blog", "Programming", "Algorithm", "AI", "Learning"]
   author: "Zhengbo Wang"
   images: ["profile.jpg"]
@@ -85,13 +84,7 @@ params:
   ShowToc: true
   TocOpen: true
 
-  # 添加评论系统支持（已禁用，但保留配置）
   comments: false
-  # 可以根据需要启用特定评论系统
-  # disqusShortname: ""
-  # utterancesRepo: ""
-
-  # 使用数学排版，支持KaTeX
   math: true
   mathAutoRender: true
 
@@ -109,9 +102,6 @@ params:
       url: "https://github.com/luke396"
     - name: email
       url: "mailto:lw7205675@gmail.com"
-    # 可以添加更多社交媒体链接
-    # - name: linkedin
-    #   url: "https://linkedin.com/in/yourprofile"
 
   editPost:
     URL: "https://github.com/luke396/blog/tree/main/content"
@@ -128,26 +118,13 @@ params:
   fuseOpts:
     isCaseSensitive: false
     shouldSort: true
-    location: 0
-    distance: 1000
     threshold: 0.4
-    minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
-    includeMatches: true
-
-  # 添加自定义头部
-  profileMode:
-    enabled: false
-
-  # 添加谷歌分析（如需使用）
-  # analytics:
-  #   google:
-  #     SiteVerificationTag: ""
 
 markup:
   goldmark:
     renderer:
-      unsafe: true
+      unsafe: false
   highlight:
     codeFences: true
     guessSyntax: true

@@ -1,16 +1,15 @@
 ---
 title: "MIT 6.006 L02"
 date: "2025-04-05T21:14:38+08:00"
-lastmod: "2025-04-05T21:14:38+08:00"
 draft: false
-description: "MIT 6.006算法导论课程的第二讲笔记，涵盖静态数组、链表和动态数组的时间复杂度分析"
-categories: ["learn", "course notes", "algorithm"]
-tags: ["python", "6.006", "mit", "算法"]
+description: "MIT 6.006 算法导论第二讲笔记，深入解析接口与数据结构的区别，系统比较静态数组、链表和动态数组的实现与效率，助力理解数据结构设计思想。"
+categories: ["study", "course-notes", "algorithms"]
+tags: ["python", "mit-6006", "mit", "algorithms"]
 series: "MIT 6.006"
-keywords: ["linked list", "static array", "dynamic array", "amortization"]
 ---
 
-这是 MIT 6.006 算法导论课程的第二讲笔记，主要介绍了数据结构和接口的区别，以及静态数组、链表和动态数组在实现队列的时间复杂度分析。
+
+MIT 6.006 是麻省理工学院著名的算法课程。本讲笔记详细梳理了接口（API）与数据结构的本质区别，系统讲解了静态数组、链表、动态数组等常用数据结构的实现方式与时间复杂度对比，帮助读者深入理解数据结构的设计思想与实际应用。
 
 <!--more-->
 

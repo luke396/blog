@@ -1,37 +1,15 @@
 ---
 title: "Hylee MLDL 2021 L01"
 date: "2025-04-14T19:02:45+08:00"
-lastmod: "2025-04-18T15:35:34+08:00"
 draft: false
-categories: ["learn", "mldl", "hylee"]
+categories: ["study", "machine-learning"]
 tags:
-  [
-    "machine learning",
-    "deep learning",
-    "hylee",
-    "gradient descent",
-    "sigmoid",
-    "relu",
-    "backpropagation",
-  ]
-series: "hylee mldl 2021"
-
-# SEO相关
-keywords:
-  [
-    "machine learning",
-    "deep learning",
-    "hylee",
-    "gradient descent",
-    "sigmoid",
-    "relu",
-    "backpropagation",
-  ]
+  ["machine-learning", "deep-learning", "gradient-descent", "backpropagation"]
+series: "hylee mldl"
+description: "Hylee 2021 机器学习与深度学习课程第一讲，系统梳理机器学习三步走、模型优化、激活函数、深度学习与反向传播等核心原理，助力全面掌握深度学习基础。"
 ---
 
-<!-- 文章摘要：此处内容会在首页显示为文章预览 -->
-
-这是 Hylee 2021 机器学习与深度学习课程的第一讲笔记，主要介绍了机器学习的基本概念、三步走流程、模型改进并引出深度学习。
+本笔记基于 Hylee 2021 机器学习与深度学习课程第一讲，系统梳理了机器学习三步走（模型假设、损失函数、参数优化）、模型改进思路、激活函数（sigmoid、ReLU）、深度学习结构与反向传播算法等核心知识，结合案例帮助读者高效构建深度学习的理论基础与实践认知。
 
 <!--more-->
 

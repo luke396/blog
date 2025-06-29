@@ -29,3 +29,5 @@ _testmain.go
 .DS_Store
 .hugo_build.lock
 resources/_gen/
+/resources
+.hugo_build.lock
