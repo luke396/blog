@@ -16,22 +16,21 @@
   integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh"
   crossorigin="anonymous"
 ></script>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     renderMathInElement(document.body, {
-      // customised options
-      // • auto-render specific keys, e.g.:
+      // 支持的定界符
       delimiters: [
         { left: "$$", right: "$$", display: true },
         { left: "$", right: "$", display: false },
         { left: "\\(", right: "\\)", display: false },
         { left: "\\[", right: "\\]", display: true },
       ],
-      // • rendering keys, e.g.:
-      throwOnError: false,
+      throwOnError: false,  // 出错时不阻止全页渲染
+      processEscapes: true,  // 允许用 \$ 来输出普通美元符号
       ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
-      ignoredClasses: ["no-math"],
-      processEscapes: true,
-    });
+      ignoredClasses: ["no-math"], // 给不想被渲染的元素加 class="no-math"
+    }); 
   });
 </script>
