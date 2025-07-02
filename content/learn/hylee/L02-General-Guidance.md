@@ -1,7 +1,7 @@
 ---
 title: "Hylee Machine learning 2021 L02 General Guidance"
 date: "2025-07-02T13:47:30+08:00"
-draft: true
+draft: false
 description: "Hylee 2021 机器学习与深度学习课程第二讲，系统梳理如何分析训练误差与测试误差，提升模型在 Kaggle 等竞赛中的表现，涵盖模型偏差、优化问题、过拟合与数据分布不匹配等常见情形的应对策略"
 categories: ["study", "machine-learning"]
 tags: ["model-bias", "overfitting", "mismatch", "data-augmentation"]
