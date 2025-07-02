@@ -1,5 +1,7 @@
 {{- /* Reading Progress Bar */ -}}
-<div id="reading-progress"><div id="reading-progress-bar"></div></div>
+<div id="reading-progress">
+  <div id="reading-progress-bar"></div>
+</div>
 
 {{- /* Optimized script with defer attribute and better performance */ -}}
 <script defer>
@@ -63,23 +65,67 @@
 {{- /* Font loading with preload for better performance */ -}}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  rel="preload"
-  as="style"
+<link rel="preload" as="style"
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" />
+<link rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-/>
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-  media="print"
-  onload="this.media='all'"
-/>
+  media="print" onload="this.media='all'" />
 <noscript>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-  />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" />
 </noscript>
 
-{{- /* Load math support conditionally */ -}} {{ if or .Params.math
-.Site.Params.math }} {{ partial "math.html" . }} {{ end }}
+{{- /* Load math support conditionally */ -}}
+{{ if or .Params.math .Site.Params.math }}
+{{ partial "math.html" . }}
+{{ end }}
+
+{{- /* Load Mermaid conditionally */ -}}
+{{ if or (.Store.Get "hasMermaid") (findRE "class=\"mermaid\"" .Content) (findRE "```mermaid" .RawContent) }}
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: "base",
+    securityLevel: "loose",
+    themeVariables: {
+      primaryColor: "#e3f2fd",
+      primaryTextColor: "#000000",
+      primaryBorderColor: "#2196f3",
+      lineColor: "#333333",
+      secondaryColor: "#fff3e0",
+      tertiaryColor: "#f3e5f5",
+      background: "#ffffff",
+      mainBkg: "#ffffff",
+      secondBkg: "#f8f9fa",
+      tertiaryBkg: "#e9ecef",
+    },
+  });
+</script>
+
+<style>
+  /* Ensure Mermaid diagrams always have white background */
+  .mermaid {
+    background-color: #ffffff !important;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Dark theme overrides for better contrast */
+  .dark .mermaid {
+    background-color: #ffffff !important;
+    border: 1px solid #e0e0e0;
+  }
+
+  /* Ensure text in mermaid is always dark for readability */
+  .mermaid * {
+    color: #000000 !important;
+  }
+
+  .mermaid text {
+    fill: #000000 !important;
+  }
+</style>
+{{ end }}
