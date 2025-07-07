@@ -1,5 +1,5 @@
 ---
-title: "Hylee Machine learning 2021 L01"
+title: "Hylee Machine learning 2021 L01 Introduction"
 date: "2025-04-14T19:02:45+08:00"
 draft: false
 categories: ["study", "machine-learning"]
