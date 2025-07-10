@@ -1,5 +1,5 @@
 ---
-title: "L04 From One-Hot to Softmax: A Complete Analysis of the Output Layer in Classification Networks"
+title: "From One-Hot to Softmax: A Complete Analysis of the Output Layer in Classification Networks"
 date: "2025-07-10T16:37:14+08:00"
 draft: false
 description: "深度学习做分类到底该怎么选输出层？本文用直观示例解释 one-hot 编码为何能消除“排序”误差，进一步解析 softmax 如何生成概率分布，以及交叉熵为何比 MSE 更易优化，帮助你从输入到损失函数全面理解分类神经网络的关键设计。"
@@ -8,7 +8,7 @@ tags: ["one-hot", "softmax", "cross-entropy", "classification"]
 series: "hylee"
 ---
 
-在分类任务中，简单地把类别编号为 1、2、3 会暗含距离和顺序偏差。为避免这一问题，我们首先使用 one-hot 向量对离散标签做无序编码。随后，网络输出层通过 softmax 将 logits 映射为 0-1 之间且和为 1 的概率分布；真正的 one-hot 只是标签而非模型输出。为了衡量输出概率与真实标签的差距，交叉熵损失因其在“错误但自信”的区域梯度更大，相比均方误差（MSE）更易于优化。本文结合公式推导与误差面可视化，说明从编码、输出到损失函数的完整链条如何共同提升分类模型的训练效率与性能。
+本文是李宏毅机器学习2021系列课程的第四篇。在分类任务中，简单地把类别编号为 1、2、3 会暗含距离和顺序偏差。为避免这一问题，我们首先使用 one-hot 向量对离散标签做无序编码。随后，网络输出层通过 softmax 将 logits 映射为 0-1 之间且和为 1 的概率分布；真正的 one-hot 只是标签而非模型输出。为了衡量输出概率与真实标签的差距，交叉熵损失因其在“错误但自信”的区域梯度更大，相比均方误差（MSE）更易于优化。本文结合公式推导与误差面可视化，说明从编码、输出到损失函数的完整链条如何共同提升分类模型的训练效率与性能。
 
 <!--more-->
 
