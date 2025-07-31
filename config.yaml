@@ -9,6 +9,7 @@ copyright: "© 2025 Zhengbo Wang"
 enableInlineShortcodes: true
 hasCJKLanguage: true
 enableRobotsTXT: true
+enableGitInfo: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
@@ -19,6 +20,13 @@ defaultContentLanguage: "zh-CN"
 defaultContentLanguageInSubdir: false
 canonifyURLs: true
 rssLimit: 20
+
+frontmatter:
+  lastmod:
+    - lastmod
+    - :git
+    - date
+    - publishDate
 
 minify:
   disableXML: true

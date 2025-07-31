@@ -1,7 +1,6 @@
 ---
 title: "深度学习基础入门：机器学习三步走与神经网络（Hylee 2021 L01）"
 date: "2025-04-14T19:02:45+08:00"
-lastmod: "2025-07-31T00:00:00+08:00"
 draft: false
 categories: ["study", "machine-learning"]
 tags:
