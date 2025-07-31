@@ -4,7 +4,18 @@ date: "2025-06-28T21:15:09+08:00"
 lastmod: "2025-06-28T21:15:09+08:00"
 draft: false
 description: "用 Notion 数据库和 RSS 技术打造属于自己的稍后读系统，结合自动化脚本与 Caddy 部署，轻松实现多平台内容聚合与高效信息管理。"
-tags: ["notion", "RSS", "caddy", "infomation"]
+keywords:
+    - notion-integration
+    - rss-automation
+    - read-later-system
+    - caddy-deployment
+    - information-management
+    - content-aggregation
+tags: 
+    - notion
+    - RSS
+    - caddy
+    - infomation
 series: "make feed"
 ---
 

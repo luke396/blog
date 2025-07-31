@@ -3,7 +3,18 @@ title: "MIT 6.006 L02"
 date: "2025-04-05T21:14:38+08:00"
 draft: false
 description: "MIT 6.006 算法导论第二讲笔记，深入解析接口与数据结构的区别，系统比较静态数组、链表和动态数组的实现与效率，助力理解数据结构设计思想。"
-tags: ["python", "mit-6006", "mit", "algorithms"]
+keywords:
+    - data-structures
+    - arrays-vs-linkedlists
+    - dynamic-arrays
+    - algorithm-efficiency
+    - mit-algorithms
+    - amortized-analysis
+tags: 
+    - python
+    - mit-6006
+    - mit
+    - algorithms
 series: "MIT 6.006"
 ---
 

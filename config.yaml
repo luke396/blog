@@ -70,7 +70,7 @@ outputs:
 params:
   env: production
   description: "一个专注于技术与生活的博客。"
-  keywords: ["Blog", "Programming", "Algorithm", "AI", "Learning"]
+  keywords: ["machine-learning", "deep-learning", "algorithms", "python", "neural-networks", "optimization", "data-structures", "mit-6006", "hugo-blog", "rss", "notion", "classification", "regression"]
   author: "Zhengbo Wang"
   images: ["profile.jpg"]
 

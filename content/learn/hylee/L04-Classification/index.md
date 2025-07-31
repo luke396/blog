@@ -2,8 +2,19 @@
 title: "From One-Hot to Softmax: A Complete Analysis of the Output Layer in Classification Networks"
 date: "2025-07-10T16:37:14+08:00"
 draft: false
-description: "深度学习做分类到底该怎么选输出层？本文用直观示例解释 one-hot 编码为何能消除“排序”误差，进一步解析 softmax 如何生成概率分布，以及交叉熵为何比 MSE 更易优化，帮助你从输入到损失函数全面理解分类神经网络的关键设计。"
-tags: ["one-hot", "softmax", "cross-entropy", "classification"]
+description: "深度学习做分类到底该怎么选输出层？本文用直观示例解释 one-hot 编码为何能消除"排序"误差，进一步解析 softmax 如何生成概率分布，以及交叉熵为何比 MSE 更易优化，帮助你从输入到损失函数全面理解分类神经网络的关键设计。"
+keywords:
+    - one-hot-encoding
+    - softmax-function
+    - cross-entropy-loss
+    - classification-networks
+    - neural-network-theory
+    - loss-function-optimization
+tags: 
+    - one-hot
+    - softmax
+    - cross-entropy
+    - classification
 series: "hylee"
 ---
 
