@@ -1,8 +1,10 @@
 ---
-title: "深度学习基础入门：机器学习三步走与神经网络（Hylee 2021 L01）"
+title: "机器学习三步走与神经网络(Hylee 2021 L01)"
 date: "2025-04-14T19:02:45+08:00"
 draft: false
-categories: ["study", "machine-learning"]
+categories: 
+  - study
+  - machine-learning
 tags:
   - deep-learning
   - gradient-descent
@@ -22,7 +24,6 @@ keywords:
   - backpropagation-algorithm
   - activation-functions
 math: true
-weight: 1
 ---
 
 这篇博文借助 Hylee 2021 课程第一讲，以“机器学习三步走 → 模型改进 → 深度网络 → 反向传播”主线，结合 YouTube 观影量示例，帮助完全零基础读者理解深度学习核心概念与训练流程。
