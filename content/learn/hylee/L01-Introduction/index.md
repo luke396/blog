@@ -149,11 +149,11 @@ Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数
 
 ![Chain rule mathematical principle diagram, mathematical foundation of backpropagation algorithm](l01-20250418141524716.png "Chain rule principle")
 
-如果用 $C^n$ 表示 $y^n$ 与 $\hat{y}^n$ 之间的误差，那么 $L(\theta)=\sum_{n=1}^{N} C^n(\theta)$，通过链式法则进而有 $\frac{ \partial L(\theta) }{ \partial w }=\sum_{n=1}^{N} \frac{ \partial C^n(\theta) }{ \partial w }$。
+如果用 $C^n$ 表示 $y^n$ 与 $\hat{y}^n$ 之间的误差，那么 $L(\theta)=\sum_{n=1}^{N} C^n(\theta)$，通过链式法则进而有 $\frac{ \partial L(\theta) }{ \partial w }=\sum_{n=1}^{N} \frac{ \partial C^n(\theta) }{ \partial w }$。尤其需要注意当 $z$ 拥有两个分量时 - Case 2，链式法则要求我们要同时考虑二者的影响。
 
 ![Backpropagation algorithm overview showing forward propagation and backward propagation computation flow](l01-20250418142209152.png "Backpropagation algorithm overview")
 
-其中 $\frac{ \partial z }{ \partial w_{1} }=x_{1}, \frac{ \partial z }{ \partial w_{2} }=x_{2}$，其结果就是 $x$，计算起来是十分容易的，是我们对应 $w$ 的输入，所以 forward pass 是简单和容易理解的，具体有下图。
+其中 $\frac{ \partial z }{ \partial w_{1} }=x_{1}, \frac{ \partial z }{ \partial w_{2} }=x_{2}$，其结果就是 $x$，计算起来是十分容易的，是我们对应 $w$ 的输入。我们结合 forward pass，具体有下图 $\frac{ \partial z }{ \partial w }=x$.
 
 ![Backpropagation forward pass process showing computation steps from input to output](l01-20250418144101086.png "Forward propagation computation")
 
@@ -176,6 +176,26 @@ Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数
 总结一下，当我们想计算损失函数对权重的偏微分 $\frac{ \partial C }{ \partial w }$ 用于梯度下降更新，就可以先 forward pass 计算任意位置的 $\frac{ \partial z_{i} }{ \partial w_{i} }$，然后再反向计算一遍任意位置的 $\frac{ \partial C }{ \partial z_{i} }$，这样就可以通过链式法则得到 $\frac{ \partial C }{ \partial w }=\frac{ \partial z_{i} }{ \partial w_{i} }\frac{ \partial C }{ \partial z_{i} }$，这就是 backpropagation。
 
 ![Backpropagation algorithm summary diagram showing complete forward and backward propagation computation flow](l01-20250418152122305.png "Backpropagation algorithm summary")
+
+上面的演示，相比较于简单的单链条 x -> z -> a -> y -> L 略有复杂，但思路是一致的。只不过需要多考虑来自不同神经元的影响。
+
+## Sigmoid VS. ReLU
+
+- 梯度饱和 vs. 非饱和
+  - Sigmoid 在输入很大或很小时趋近 0 或 1，此时导数 σ′(z)=σ(z)(1−σ(z))≈0，梯度几乎消失——深层网络训练困难。
+  - ReLU 在 z>0 区域导数恒为 1，非饱和；z<0 区域导数为 0（稀疏激活），因此正向区域能保持梯度流动，缓解梯度消失。
+- 拟合能力（piece-wise linear 特性）
+  - ReLU 本质上是 "0 或线性 "，多个 ReLU 加权可组成任意分段线性，对复杂函数拟合很灵活。
+  - Sigmoid 也是非线性，但输出范围受限 $[ 0, 1]$，对某些需要 " 负激活 " 或大幅度变化的场景限制较多。
+- 计算效率
+  - Sigmoid 需要 exp(·) 运算
+  - ReLU 只需 max(0, z)，在硬件上极其便宜。
+- 输出分布 & 收敛速度
+  - Sigmoid 输出均为正，导致后续层输入均为正，易造成 " 均值偏移 "，需要特别初始化或 BatchNorm 去缓解。
+  - ReLU 有 50 % 左右概率给 0，激活更稀疏，常被认为有 " 天然正则化 " 效果，且收敛往往更快。
+- 潜在缺点
+  - ReLU 的 "dead neuron" 问题：若大量权重让 z<0，则该神经元梯度永远 0，不再更新。可用 Leaky-ReLU、ELU 等改进。
+  - Sigmoid 虽有梯度消失，但在输出层做 " 概率 " 解释（如二分类）仍很受欢迎。
 
 ## Reference
 
