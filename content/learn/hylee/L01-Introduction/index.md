@@ -1,15 +1,32 @@
 ---
-title: "梯度下降与激活函数入门：一文看懂深度学习三步走（Hylee 2021 L01 笔记）"
+title: "深度学习基础入门：机器学习三步走与神经网络（Hylee 2021 L01）"
 date: "2025-04-14T19:02:45+08:00"
+lastmod: "2025-07-31T00:00:00+08:00"
 draft: false
 categories: ["study", "machine-learning"]
 tags:
-  ["machine-learning", "deep-learning", "gradient-descent", "backpropagation"]
+  - deep-learning
+  - gradient-descent
+  - neural-networks
+  - backpropagation
+  - activation-functions
+  - machine-learning
+  - optimization
 series: "hylee"
-description: "Hylee 2021 机器学习与深度学习课程第一讲，系统梳理机器学习三步走、模型优化、激活函数、深度学习与反向传播等核心原理，助力全面掌握深度学习基础。"
+author: "Luke"
+description: "深入浅出讲解深度学习核心概念：从机器学习三步走（模型假设、损失函数、优化求解）到神经网络与反向传播算法。结合YouTube观看量预测实例，全面掌握梯度下降、激活函数、模型改进等关键技术，为深度学习打下坚实基础。"
+keywords:
+  - deep-learning-basics
+  - machine-learning-fundamentals
+  - neural-network-theory
+  - gradient-descent-algorithm
+  - backpropagation-algorithm
+  - activation-functions
+math: true
+weight: 1
 ---
 
-这篇博文借助 Hylee 2021 课程第一讲，“机器学习三步走 → 模型改进 → 深度网络 → 反向传播”主线，结合 YouTube 观影量示例，帮助完全零基础读者理解深度学习核心概念与训练流程。
+这篇博文借助 Hylee 2021 课程第一讲，以“机器学习三步走 → 模型改进 → 深度网络 → 反向传播”主线，结合 YouTube 观影量示例，帮助完全零基础读者理解深度学习核心概念与训练流程。
 
 <!--more-->
 
@@ -21,7 +38,7 @@ AlphaGO 也是个分类问题，不过是从 19x19 的结果中选择。
 
 ## 机器学习三步走
 
-机器如何找到这个函数？课上的例子，是利用 youtube 上过去的观看信息等资料，预测明天的频道观看次数。
+机器如何找到这个函数？课上的例子，是利用 youtube 上当前视频的过去观看信息等资料，预测明天的频道观看次数。
 
 这个过程可以总结为三个步骤。
 
@@ -39,7 +56,7 @@ $L=\frac{1}{N}\sum e_{n}$，$L$ 越大代表着参数越差，有 MAE - mean abs
 
 - 最佳化 optimization, 数学表示 $w^{opt}, b^{opt} = \arg\min_{w,b} L$
 
-这门课，唯一用到的方法就是梯度下降 - _gradient descent_。 以一元情况为例，随机选择初始值 $w^0$，然后计算在点的梯度/偏导数/微分 $\frac{\partial L}{\partial w} \bigg|_{w=w^0}$。
+这门课中十分常用的方法就是梯度下降 - _gradient descent_。 以一元情况为例，随机选择初始值 $w^0$，然后计算在点的梯度/偏导数/微分 $\frac{\partial L}{\partial w} \bigg|_{w=w^0}$。
 
 如果梯度是负数，增加参数值；梯度是正数则降低参数值；其实就是看左右，哪一边比较低，向低的方向迈一步。
 
@@ -55,7 +72,7 @@ $$
 
 > 这个局限，在实际中是个假问题，只是个理论上的东西。真正的痛点，在[之后有所讨论](../L03-Tips-for-train/index.md)
 
-![Gradient Descent example with equation](l01-20250413163301740.png)
+![Gradient descent algorithm example showing parameter update formula and iteration process](l01-20250413163301740.png "Gradient descent parameter update process")
 
 可以自然的，从一个参数推广到多参数。
 
@@ -65,7 +82,7 @@ $$
 
 在没看过的数据上，再进行预测和计算误差。
 
-![predict vs real value of simple linear regression](l01-20250413164346096.png)
+![Simple linear regression prediction vs actual values comparison showing model prediction limitations](l01-20250413164346096.png "Linear regression prediction comparison")
 
 可以看到，预测值 - 蓝色线条其实只是把真实值往后移动一天而已。而真实值 - 红色线条是有周期性的，周五和周六都是比较低的。在观察到周期性之后，我们的线性 model 是很差的，他似乎只考虑了前一天的数据。
 
@@ -77,25 +94,25 @@ $$
 
 Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数 + 一系列 sigmoid。
 
-![piecewise linear curves](l01-20250413173308605.png)
+![Piecewise linear curve example showing how to fit complex functions with multiple linear segments](l01-20250413173308605.png "Piecewise linear curve fitting")
 
 如果是曲线形状，是一样可以化为近似折线情形的。piecewise linear 可以拟合任意连续曲线。
 
-![piecewise in non-linear](l01-20250413173550177.png)
+![Piecewise linear approximation of nonlinear function showing how piecewise linear can fit any continuous curve](l01-20250413173550177.png "Nonlinear function piecewise linear approximation")
 
 上面的蓝色折线，用 sigmoid 曲线进行逼近，$y=c \frac{1}{1+e^{-(b+wx_{1})}}=c\times sigmoid(b+wx_{1})$，蓝色的曲线，一般可以叫做 hard sigmoid。不同的 sigmoid 形状，就是由不同程度 $c,w,b$ 构成。
 
-![sigmoid with different w b c](l01-20250413174058617.png)
+![Sigmoid function shape changes under different parameters w, b, c](l01-20250413174058617.png "Sigmoid function parameter effects")
 
 新的一元函数用可以形如 $y=b+\sum c_{i}\times sigmoid(b_{i}+w_{i}x_{1})$来近似拟合。多元函数的具体见下图：
 
 > sigmoid 的数量是可以自定义的，这是另一个超参数。sigmoid 数量越多，就越能拟合复杂的情形。
 
-![y fitted by weighted sum of sigmoid](l01-20250413211134398.png)
+![Mathematical representation of weighted sum of multiple sigmoid functions fitting complex function](l01-20250413211134398.png "Sigmoid function weighted sum fitting")
 
 进一步利用向量乘法，$\mathbf{r}=\mathbf{b}+W\mathbf{x}$，$\mathbf{a}=\sigma(\mathbf{r})$，其中 $a_{1}=sigmoid(r_{1})$，$y=b+\mathbf{c}^T\mathbf{a}$，具体见下图
 
-![y fitted by weighted sum of sigmoid with vector notation](l01-20250413211527658.png)
+![Sigmoid function weighted sum model structure using vector notation](l01-20250413211527658.png "Vectorized sigmoid model structure")
 
 注意，此时我们就把机器学习三步走中的第一步，定义带有未知数的函数形式，变成了上图的形式。
 
@@ -105,23 +122,23 @@ Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数
 
 改进后的 optimization 也与之前没什么区别，方法还是梯度下降找最下损失。梯度的表示方法见下图，本质上就是所有参数 $\theta$ 对 $L$ 的偏导数，构成了一个向量。
 
-![vector gradient descent](l01-20250413212757429.png)
+![Vector gradient descent algorithm principle diagram for multi-parameter case](l01-20250413212757429.png "Vector gradient descent")
 
 实际上，我们很难找到梯度为 0 的时候。具体代码中的更新方法，见下图。下图引出了 update 和 epoch 的区别。
 
 一次参数更新称为一次 iteration，也常叫 step；遍历完全部样本称为一个 epoch。我们是把所有的数据分成不同的 batch（具体多少个取决于 batch size，也是个超参数），每次取一个 batch 计算 loss 和梯度，并更新 $\theta$。当见过所有的 batch 并更新参数之后，也就是一个 epoch 。
 
-![optimize gradient descent with batch](l01-20250413213151085.png)
+![Batch gradient descent optimization process showing relationship between batch, iteration and epoch](l01-20250413213151085.png "Batch gradient descent optimization")
 
 我们可以继续，套更多层的激活函数，到底嵌套多少层，这也是个超参数。
 
-![nested activation function](l01-20250413213955071.png)
+![Multi-layer nested activation function structure showing hierarchical feature extraction in deep networks](l01-20250413213955071.png "Multi-layer activation function nesting")
 
 ## 深度学习
 
 上面我们改进后的模型，就是神经网络 - 此时每个部分叫做神经元。由于神经网络名声臭掉，人们该把他们叫做隐藏层，整个重新起名字叫 - 深度学习！
 
-![neural network](l01-20250414175619227.png)
+![Neural network structure diagram showing connections between input layer, hidden layers and output layer](l01-20250414175619227.png "Neural network structure")
 
 当后来，AlexNet, VGG, GoogleNet, Residual Net 把层数越做越多，这样一个问题就浮出水面。我们已经知道，足够多的 （横向排列的）sigmoid 就可以拟合任意函数，那我们为什么还要把他的层数越做越多，越做越深呢？且听后来分解。
 
@@ -133,15 +150,15 @@ Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数
 
 链式法则的复习见下图：
 
-![chain rule](l01-20250418141524716.png)
+![Chain rule mathematical principle diagram, mathematical foundation of backpropagation algorithm](l01-20250418141524716.png "Chain rule principle")
 
 如果用 $C^n$ 表示 $y^n$ 与 $\hat{y}^n$ 之间的误差，那么 $L(\theta)=\sum_{n=1}^{N} C^n(\theta)$，通过链式法则进而有 $\frac{ \partial L(\theta) }{ \partial w }=\sum_{n=1}^{N} \frac{ \partial C^n(\theta) }{ \partial w }$。
 
-![glance of backpropagation](l01-20250418142209152.png)
+![Backpropagation algorithm overview showing forward propagation and backward propagation computation flow](l01-20250418142209152.png "Backpropagation algorithm overview")
 
 其中 $\frac{ \partial z }{ \partial w_{1} }=x_{1}, \frac{ \partial z }{ \partial w_{2} }=x_{2}$，其结果就是 $x$，计算起来是十分容易的，是我们对应 $w$ 的输入，所以 forward pass 是简单和容易理解的，具体有下图。
 
-![forward pass of backpropagation](l01-20250418144101086.png)
+![Backpropagation forward pass process showing computation steps from input to output](l01-20250418144101086.png "Forward propagation computation")
 
 到了 backward pass $\frac{ \partial C }{ \partial z }$，问题就变得有些复杂。
 
@@ -149,24 +166,19 @@ Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数
 
 通过看图，发现 z 是通过 $z',z''$ 和后续一系列对 $C$ 进行影响（这里假定只有两项，其实不一定）。**不妨假设 $\frac{ \partial C }{ \partial z' }, \frac{ \partial C }{ \partial z'' }$ 已知**，那么 $\frac{ \partial C }{ \partial a }=\frac{ \partial z' }{ \partial a }\frac{ \partial C }{ \partial z'} + \frac{ \partial z'' }{ \partial a }\frac{ \partial C }{ \partial z'' }=w_{3}\frac{ \partial C }{ \partial z' }+w_{4}\frac{ \partial C }{ \partial z'' }$。故 $\frac{ \partial C }{ \partial z }=\sigma'[z](w_{3}\frac{ \partial C }{ \partial z' }+w_{4}\frac{ \partial C }{ \partial z'' })$
 
-![glance of backward pass of backpropagation](l01-20250418144639803.png)
+![Backpropagation backward pass process showing gradient propagation from output layer to input layer](l01-20250418144639803.png "Backward propagation gradient computation")
 
 我们可以把 backward pass 看作是一个反向传播的神经网络，其中 $\frac{ \partial C }{ \partial z'}, \frac{ \partial C }{ \partial z''}$ 已知，乘上 $w$ 再通过 $\sigma'(z)$。这里注意，$\sigma'(z)$ 是个常数，因为 $z$ 已经在前向传播中，计算得到。故这个神经元其实就是个常数乘法放大因子。所有的问题，到这里就剩如何计算 $\frac{ \partial C }{ \partial z'}, \frac{ \partial C }{ \partial z''}$。
 
-![detail of partial z](l01-20250418145800439.png)
+![Partial derivative computation details showing specific gradient calculation methods in backpropagation](l01-20250418145800439.png "Partial derivative computation details")
 
 不妨假设，$z', z''$ 通过激活函数之后，已经输出了结果 $y_{1},y_{2}$。那么此时，计算 $\frac{ \partial C }{ \partial z' }=\frac{ \partial y }{ \partial z' }\frac{ \partial C }{ \partial y_{1} }$ 就变得可能，其中 $\frac{ \partial y }{ \partial z' }$ 取决于激活函数，$\frac{ \partial C }{ \partial y_{1} }$ 取决于误差形式的设定，这也是可以简单计算得到的，$\frac{ \partial C }{ \partial z'' }$ 同理。那么只要我们从后向前，真的从 $y_{1},y_{2}$ 对应的 $\frac{ \partial C }{ \partial z_{i}}$ 开始计算，再逐步往前传播，如下图。想象是从后向前算的一个新的神经网络，其中激活函数是 $\sigma'(z)$ 为常数。这样就可以计算得到我们想要的任意位置的 $\frac{ \partial C }{ \partial z }$。这就是 backward pass。
 
-![glance of partial z](l01-20250418151507212.png)
+![Partial derivative propagation process overview showing gradient propagation paths in the network](l01-20250418151507212.png "Gradient propagation paths")
 
 总结一下，当我们想计算损失函数对权重的偏微分 $\frac{ \partial C }{ \partial w }$ 用于梯度下降更新，就可以先 forward pass 计算任意位置的 $\frac{ \partial z_{i} }{ \partial w_{i} }$，然后再反向计算一遍任意位置的 $\frac{ \partial C }{ \partial z_{i} }$，这样就可以通过链式法则得到 $\frac{ \partial C }{ \partial w }=\frac{ \partial z_{i} }{ \partial w_{i} }\frac{ \partial C }{ \partial z_{i} }$，这就是 backpropagation。
 
-![summary backpropagation](l01-20250418152122305.png)
-
-## 动手练习  
-
-1. 用 Numpy 实现一维线性回归的梯度下降一步。  
-2. 观察 batch size 从 1 到 64 时收敛曲线的变化。
+![Backpropagation algorithm summary diagram showing complete forward and backward propagation computation flow](l01-20250418152122305.png "Backpropagation algorithm summary")
 
 ## Reference
 
