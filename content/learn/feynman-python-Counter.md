@@ -3,7 +3,6 @@ title: "Feynman Python Counter"
 date: "2025-02-10T13:50:19+08:00"
 draft: false
 description: "用费曼学习法深入剖析 Python Counter 类，结合问答与实例代码，系统讲解其原理、用法与高效编程技巧。"
-categories: ["study"]
 tags: ["python", "feynman-method", "python-counter", "data-structures"]
 series: "Feynman"
 ---

@@ -2,9 +2,6 @@
 title: "机器学习三步走与神经网络(Hylee 2021 L01)"
 date: "2025-04-14T19:02:45+08:00"
 draft: false
-categories: 
-  - study
-  - machine-learning
 tags:
   - deep-learning
   - gradient-descent

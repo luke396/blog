@@ -37,7 +37,6 @@ languages:
     languageName: "中文"
     weight: 1
     taxonomies:
-      category: categories
       tag: tags
       series: series
     menu:

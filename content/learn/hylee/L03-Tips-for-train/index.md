@@ -3,7 +3,6 @@ title: "Hylee Machine learning 2021 L03 Tips for train"
 date: "2025-07-07T11:14:35+08:00"
 draft: false
 description: "深入探讨机器学习训练中的关键优化技巧：从Critical Point问题分析到Batch、Momentum和自适应学习率等实用方法，帮助解决训练过程中loss无法下降的常见问题。"
-categories: ["study", "machine-learning"]
 tags:
   [
     "critical-point",

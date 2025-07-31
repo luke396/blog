@@ -3,9 +3,6 @@ title: "训练误差与测试误差分析(Hylee 2021 L02)"
 date: "2025-07-02T13:47:30+08:00"
 draft: false
 description: "深入解析机器学习模型优化的系统性方法：从训练误差和测试误差分析入手，详细讲解模型偏差、优化问题、过拟合和数据分布不匹配的识别与解决策略，助力提升模型在实际应用中的表现。"
-categories:
-    - study
-    - machine-learning
 keywords: 
     - machine-learning
     - model-optimization
