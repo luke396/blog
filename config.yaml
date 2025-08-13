@@ -131,7 +131,21 @@ params:
 markup:
   goldmark:
     renderer:
-      unsafe: false
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - - \[
+              - \]
+            - - $$
+              - $$
+          inline:
+            - - \(
+              - \)
+            - - $
+              - $
   highlight:
     codeFences: true
     guessSyntax: true

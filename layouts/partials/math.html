@@ -29,6 +29,8 @@
       ],
       throwOnError: false,  // 出错时不阻止全页渲染
       processEscapes: true,  // 允许用 \$ 来输出普通美元符号
+      processEnvironments: true,  // 处理LaTeX环境
+      strict: false,  // 放宽严格模式以支持更多LaTeX语法
       ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
       ignoredClasses: ["no-math"], // 给不想被渲染的元素加 class="no-math"
     }); 
