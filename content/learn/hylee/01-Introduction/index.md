@@ -1,5 +1,5 @@
 ---
-title: "机器学习三步走与神经网络(Hylee 2021 L01)"
+title: "深度学习入门：从机器学习三步走到神经网络与反向传播算法详解"
 date: "2025-04-14T19:02:45+08:00"
 draft: false
 tags:
@@ -12,7 +12,7 @@ tags:
   - optimization
 series: "hylee"
 author: "Luke"
-description: "深入浅出讲解深度学习核心概念：从机器学习三步走（模型假设、损失函数、优化求解）到神经网络与反向传播算法。结合YouTube观看量预测实例，全面掌握梯度下降、激活函数、模型改进等关键技术，为深度学习打下坚实基础。"
+description: "机器学习三步走方法详解：模型假设、损失函数定义与梯度下降优化。介绍神经网络结构、激活函数选择和反向传播算法原理，以YouTube观看量预测为例展示完整流程。"
 keywords:
   - deep-learning-basics
   - machine-learning-fundamentals
@@ -23,7 +23,7 @@ keywords:
 math: true
 ---
 
-这篇博文借助 Hylee 2021 课程第一讲，以“机器学习三步走 → 模型改进 → 深度网络 → 反向传播”主线，结合 YouTube 观影量示例，帮助完全零基础读者理解深度学习核心概念与训练流程。
+这篇博文以“机器学习三步走 → 模型改进 → 深度网络 → 反向传播”主线，结合 YouTube 观影量示例，帮助完全零基础读者理解深度学习核心概念与训练流程。主体内容和具体细节多来自Hylee 2021 课程第一讲[^1] [^2]。
 
 <!--more-->
 
@@ -143,6 +143,8 @@ Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数
 
 ## Backpropagation
 
+> [^3]
+
 神经网络结构下，因为有海量的参数，梯度的维度是非常大的。 backpropagation 就是高效计算梯度的方法。
 
 链式法则的复习见下图：
@@ -199,8 +201,8 @@ Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数
 
 ## Reference
 
-<https://www.youtube.com/watch?v=Ye018rCVvOo&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J>
+[^1]: <https://www.youtube.com/watch?v=Ye018rCVvOo&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J>
 
-<https://www.youtube.com/watch?v=bHcJCp2Fyxs&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J&index=2>
+[^2]: <https://www.youtube.com/watch?v=bHcJCp2Fyxs&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J&index=2>
 
-<https://www.youtube.com/watch?v=ibJpTrp5mcE>
+[^3]: <https://www.youtube.com/watch?v=ibJpTrp5mcE>
