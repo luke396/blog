@@ -93,6 +93,8 @@ h_{t} &= o_{t} \odot \tanh(C_{t})
 \end{array}
 $$
 
+> 注意这里不同的激活函数，gate 利用 sigmoid，很大程度是由于这会把输出压缩到 [0,1] 的区间，从而可以用来表示通过的程度。
+
 其中 $\odot$ 为逐元素相乘（Hadamard product）。
 
 > 与 PyTorch 的公式 [^2] 有细节上有所不同
@@ -120,6 +122,8 @@ GRU 的主要改进是合并 forget gate 和 input gate 为 update gate。
 只需要训练两个门， reset gate $r_{t}$ - 控制着 $h_{t-1}$ 应该记住多少，如果为 0 那就遗忘；update gate $z_{t}$ - 同时控制着留着多少 $h_{t-1}$ 和 应该加上多少新备选状态 $\tilde{h}_{t}$。
 
 具体来说，备选新状态 $\tilde{h}_{t}=\tanh(W_{n}x_{t} + b_{n} +r_{t} \odot (W_{hn}h_{t-1}+b_{h}))$ ，输出 $h_{t}=(1-z_{t}) \odot\tilde{h}_{t}  + z_{t}h_{t-1}$。
+
+> 从上面的表达式中，可以发现 GRU 对于LSTM的另一个改进 - 合并了 cell state 和 hidden state。在GRU中只有 hidden state ，这个向量同时负责传递长期记忆(h_t in LSTM)和作为当前时间步输出(c_t in LSTM)的双重任务。
 
 > 此公式与 PyTorch 官方文档保持一致。在这里，更新门 $z_{t}$​ 更像一个 " 保留门 "：当其值接近 1 时，模型倾向于保留旧的隐藏状态 $h_{t-1}$。
 
