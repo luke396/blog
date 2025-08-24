@@ -1,0 +1,46 @@
+services:
+  hugo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - DOMAIN=${BLOG_DOMAIN}
+    container_name: hugo-blog
+    restart: unless-stopped
+    
+    # 环境变量配置
+    environment:
+      - BLOG_DOMAIN=${BLOG_DOMAIN}
+    
+    # 基本资源限制
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:1313/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    
+    # 标签
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    
+    # 日志管理
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    networks:
+      - caddy_proxy
+
+networks:
+  caddy_proxy:
+    external: true
