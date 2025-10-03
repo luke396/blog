@@ -17,9 +17,11 @@ keywords:
     - neural-network-training
     - overfitting-prevention
     - gradient-descent
-series: "hylee"
+series: "deep-learning-essentials"
 ---
 这篇博文通过解释 Dropout 和 Batch Normalization 的核心原理、实现细节和主要作用，旨在帮助读者理解这两种在深度学习训练中常用的正则化与优化技术。
+
+> 延伸视频讲解：Hylee 2021 机器学习课程相关章节[^hylee-video]。
 
 <!--more-->
 
@@ -96,3 +98,5 @@ Batch Normalization 的噪声是**数据驱动**的。它来自于使用当前�
 [^1]:<https://d2l.ai/chapter_multilayer-perceptrons/dropout.html#dropout>
 [^2]:<https://d2l.ai/chapter_convolutional-modern/batch-norm.html#batch-normalization>
 [^3]:<https://github.com/datawhalechina/leedl-tutorial>
+
+[^hylee-video]: <https://www.youtube.com/playlist?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J>（Hylee 2021 机器学习课程中关于 Dropout 与 Batch Normalization 的章节）

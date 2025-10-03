@@ -17,13 +17,13 @@ keywords:
     - positional-encoding
     - query-key-value
     - sequence-to-sequence
-series: "hylee"
+series: "deep-learning-essentials"
 ---
 
 
 Self-Attention 机制是现代深度学习的重要突破，它通过 Query-Key-Value 三元组计算，彻底解决了传统 RNN/LSTM 在处理序列数据时面临的**并行计算瓶颈**和**长距离信息损失**问题。本文将深入剖析其核心原理、多头注意力设计以及位置编码技术。
 
-> 内容基于李宏毅老师机器学习课程 [^1][^2]，结合最新技术发展整理
+> 延伸视频讲解：Hylee 2021 机器学习课程中关于 Self-Attention 与 Transformer 的章节[^1][^2]。
 
 <!--more-->
 

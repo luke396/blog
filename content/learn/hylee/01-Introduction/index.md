@@ -10,7 +10,7 @@ tags:
   - activation-functions
   - machine-learning
   - optimization
-series: "hylee"
+series: "deep-learning-essentials"
 author: "Luke"
 description: "机器学习三步走方法详解：模型假设、损失函数定义与梯度下降优化。介绍神经网络结构、激活函数选择和反向传播算法原理，以YouTube观看量预测为例展示完整流程。"
 keywords:
@@ -23,7 +23,9 @@ keywords:
 math: true
 ---
 
-这篇博文以“机器学习三步走 → 模型改进 → 深度网络 → 反向传播”主线，结合 YouTube 观影量示例，帮助完全零基础读者理解深度学习核心概念与训练流程。主体内容和具体细节多来自Hylee 2021 课程第一讲[^1] [^2]。
+这篇博文以“机器学习三步走 → 模型改进 → 深度网络 → 反向传播”主线，结合 YouTube 观影量示例，帮助完全零基础读者理解深度学习核心概念与训练流程。
+
+> 想搭配视频学习的读者，可参考 Hylee 2021 课程第一讲[^1][^2]。
 
 <!--more-->
 
@@ -47,7 +49,7 @@ AlphaGO 也是个分类问题，不过是从 19x19 的结果中选择。
 
 - 定义 loss (is a function of parameters, $L(b,w)$)，输出代表着这组参数的好坏
 
-具体的loss数值从 training data 中计算，在这个问题中，就是频道过去的观看次数，$e=|y-\hat{y}|$，其中 $y$ 就是 label - 正确的值。
+具体的 loss 数值从 training data 中计算，在这个问题中，就是频道过去的观看次数，$e=|y-\hat{y}|$，其中 $y$ 就是 label - 正确的值。
 
 $L=\frac{1}{N}\sum e_{n}$，$L$ 越大代表着参数越差，有 MAE - mean absolute error 和 MSE 等。如果 $y$ 和 $\hat{y}$ 都是概率分布的话，$L$ 可能选择使用 Cross entropy - 交叉熵。
 
@@ -57,7 +59,7 @@ $L=\frac{1}{N}\sum e_{n}$，$L$ 越大代表着参数越差，有 MAE - mean abs
 
 如果梯度是负数，增加参数值；梯度是正数则降低参数值；其实就是看左右，哪一边比较低，向低的方向迈一步。
 
-这一步的大小 $\eta \times \frac{\partial L}{\partial w} \bigg|_{w=w^0}$ 取决于斜率/微分和学习率 $\eta$  (learning rate)，是个超参数 hyperparameter (自己设定的，决定参数的更新效率)。
+这一步的大小 $\eta \times \frac{\partial L}{\partial w} \bigg|_{w=w^0}$ 取决于斜率/微分和学习率 $\eta$ (learning rate)，是个超参数 hyperparameter (自己设定的，决定参数的更新效率)。
 
 $$
 w^{1} = w^0 - \eta \frac{\partial L}{\partial w} \bigg|_{w=w^0}
@@ -202,7 +204,5 @@ Piecewise Linear Curves - 对于线性回归的改进，把曲线分解为常数
 ## Reference
 
 [^1]: <https://www.youtube.com/watch?v=Ye018rCVvOo&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J>
-
 [^2]: <https://www.youtube.com/watch?v=bHcJCp2Fyxs&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J&index=2>
-
 [^3]: <https://www.youtube.com/watch?v=ibJpTrp5mcE>

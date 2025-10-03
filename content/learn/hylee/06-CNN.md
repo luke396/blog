@@ -18,10 +18,12 @@ keywords:
     - image-classification
     - neural-network-optimization
     - deep-learning-fundamentals
-series: "hylee"
+series: "deep-learning-essentials"
 ---
 
-这篇博文通过两种不同的叙事角度，生动地解释了卷积神经网络（CNN）如何通过局部感受野、参数共享和池化这三大核心设计，来有效处理图像数据并解决传统全连接网络参数过多的问题。主要内容和细节多参考自 Hylee 的机器学习 2021 版本 [^1]。
+这篇博文通过两种不同的叙事角度，生动地解释了卷积神经网络（CNN）如何通过局部感受野、参数共享和池化这三大核心设计，来有效处理图像数据并解决传统全连接网络参数过多的问题。
+
+> 延伸视频讲解：Hylee 2021 机器学习课程中的 CNN 章节[^1]。
 
 CNN 是神经网络架构的一种，在图像处理领域所向披靡，也一般是深度学习教程中最先学习的网络架构。
 

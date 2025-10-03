@@ -10,7 +10,7 @@ tags:
     - gradient-vanishing
     - sequence-modeling
     - neural-networks
-series: "hylee"
+series: "deep-learning-essentials"
 keywords:
     - recurrent-neural-networks
     - lstm-architecture
@@ -20,6 +20,8 @@ keywords:
 ---
 
 这篇博文介绍了循环神经网络 (RNN) 如何通过引入 " 记忆 "（隐藏状态）和参数共享来处理序列数据，并探讨了其面临的梯度消失/爆炸问题，最后引出了 LSTM 和 GRU 作为更优的解决方案。
+
+> 延伸视频讲解：Hylee 2021 机器学习课程第 7 讲[^hylee-video]。
 <!--more-->
 
 ## 对句子编码
@@ -144,3 +146,4 @@ GRU 在小数据上可能表现更好，在大数据上与 LSTM 相差不大，�
 
 [^1]:<https://github.com/datawhalechina/leedl-tutorial>
 [^2]: <https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTM.html>
+[^hylee-video]: <https://www.youtube.com/playlist?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J>（Hylee 2021 机器学习课程第 7 讲所在播放列表）
