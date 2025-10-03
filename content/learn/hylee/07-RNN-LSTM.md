@@ -1,27 +1,25 @@
 ---
-title: "从RNN到LSTM：深入理解循环神经网络的“记忆”与“遗忘”"
+title: 从RNN到LSTM：深入理解循环神经网络的“记忆”与“遗忘”
 date: "2025-08-13T15:48:43+08:00"
 draft: false
-description: "探索循环神经网络RNN如何通过隐藏状态和参数共享处理序列数据，深入分析梯度消失问题及LSTM、GRU的解决方案"
+description: 探索循环神经网络RNN如何通过隐藏状态和参数共享处理序列数据，深入分析梯度消失问题及LSTM、GRU的解决方案
 tags:
-    - rnn
-    - lstm
-    - gru
-    - gradient-vanishing
-    - sequence-modeling
-    - neural-networks
-series: "deep-learning-essentials"
+  - deep-learning
+  - neural-networks
+  - sequence-modeling
+series: deep-learning-essentials
 keywords:
-    - recurrent-neural-networks
-    - lstm-architecture
-    - gradient-vanishing
-    - sequence-processing
-    - memory-networks
+  - recurrent-neural-networks
+  - lstm-architecture
+  - gradient-vanishing
+  - sequence-processing
+  - memory-networks
 ---
 
 这篇博文介绍了循环神经网络 (RNN) 如何通过引入 " 记忆 "（隐藏状态）和参数共享来处理序列数据，并探讨了其面临的梯度消失/爆炸问题，最后引出了 LSTM 和 GRU 作为更优的解决方案。
 
 > 延伸视频讲解：Hylee 2021 机器学习课程第 7 讲[^hylee-video]。
+
 <!--more-->
 
 ## 对句子编码
@@ -58,7 +56,7 @@ $$
 
 RNN 对于 MLP 的改进，可以概括为三点： hidden state 当作输入；接受序列输入；参数共享；
 
-简单 RNN 只能看到左边 - 上文的信息，而无法得到右边 - 下文的信息。所以有了双向 RNN - Bi_RNN ，即同时训练两个网络，一个从序列左往序列右得到隐藏状态 $h_{t}$，一个从右往左得到隐藏状态 $h_{t}'$。PyTorch 在指定双向的时候，就会输出这两个 hidden state 的横向拼接，一般情况下，我们只要再把这个尺寸为 hidden_size * 2 的输出接上一个线性全连接层即可得到输出。此时，我们的输出，就既可以看到上文，又可以看到下文。这种改进，在绝大部分场景都可以提高准确率。除了例如实时翻译这种，无法得到完整序列而无法应用双向 RNN 的场景。
+简单 RNN 只能看到左边 - 上文的信息，而无法得到右边 - 下文的信息。所以有了双向 RNN - Bi*RNN ，即同时训练两个网络，一个从序列左往序列右得到隐藏状态 $h*{t}$，一个从右往左得到隐藏状态 $h_{t}'$。PyTorch 在指定双向的时候，就会输出这两个 hidden state 的横向拼接，一般情况下，我们只要再把这个尺寸为 hidden_size \* 2 的输出接上一个线性全连接层即可得到输出。此时，我们的输出，就既可以看到上文，又可以看到下文。这种改进，在绝大部分场景都可以提高准确率。除了例如实时翻译这种，无法得到完整序列而无法应用双向 RNN 的场景。
 
 一般的 RNN 的 hidden state 是把隐藏层的输出进行储存， 是 Elman 网络。还有一种变形，是把隐藏层通过线性层得到的结果储存，叫 Jordan 网络。
 
@@ -125,7 +123,7 @@ GRU 的主要改进是合并 forget gate 和 input gate 为 update gate。
 
 具体来说，备选新状态 $\tilde{h}_{t}=\tanh(W_{n}x_{t} + b_{n} +r_{t} \odot (W_{hn}h_{t-1}+b_{h}))$ ，输出 $h_{t}=(1-z_{t}) \odot\tilde{h}_{t}  + z_{t}h_{t-1}$。
 
-> 从上面的表达式中，可以发现 GRU 对于LSTM的另一个改进 - 合并了 cell state 和 hidden state。在GRU中只有 hidden state ，这个向量同时负责传递长期记忆(h_t in LSTM)和作为当前时间步输出(c_t in LSTM)的双重任务。
+> 从上面的表达式中，可以发现 GRU 对于 LSTM 的另一个改进 - 合并了 cell state 和 hidden state。在 GRU 中只有 hidden state ，这个向量同时负责传递长期记忆(h_t in LSTM)和作为当前时间步输出(c_t in LSTM)的双重任务。
 
 > 此公式与 PyTorch 官方文档保持一致。在这里，更新门 $z_{t}$​ 更像一个 " 保留门 "：当其值接近 1 时，模型倾向于保留旧的隐藏状态 $h_{t-1}$。
 
@@ -144,6 +142,6 @@ GRU 在小数据上可能表现更好，在大数据上与 LSTM 相差不大，�
 
 ## Reference
 
-[^1]:<https://github.com/datawhalechina/leedl-tutorial>
+[^1]: <https://github.com/datawhalechina/leedl-tutorial>
 [^2]: <https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTM.html>
 [^hylee-video]: <https://www.youtube.com/playlist?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J>（Hylee 2021 机器学习课程第 7 讲所在播放列表）

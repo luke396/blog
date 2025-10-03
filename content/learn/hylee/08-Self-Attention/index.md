@@ -1,25 +1,22 @@
 ---
-title: "Self-Attention 机制：从 RNN/LSTM 到 Transformer 的关键突破"
+title: Self-Attention 机制：从 RNN/LSTM 到 Transformer 的关键突破
 date: "2025-08-15T16:21:22+08:00"
 draft: false
-description: "深入解析 Self-Attention 机制的核心原理，包括 Query-Key-Value 计算、多头注意力、位置编码等关键组件，以及其如何解决传统序列模型的效率和长距离依赖问题"
+description: 深入解析 Self-Attention 机制的核心原理，包括 Query-Key-Value 计算、多头注意力、位置编码等关键组件，以及其如何解决传统序列模型的效率和长距离依赖问题
 tags:
-    - self-attention
-    - transformer
-    - neural-networks
-    - sequence-modeling
-    - machine-learning
-    - attention-mechanism
+  - deep-learning
+  - neural-networks
+  - sequence-modeling
+  - transformer
 keywords:
-    - self-attention
-    - transformer
-    - multi-head-attention
-    - positional-encoding
-    - query-key-value
-    - sequence-to-sequence
-series: "deep-learning-essentials"
+  - self-attention
+  - transformer
+  - multi-head-attention
+  - positional-encoding
+  - query-key-value
+  - sequence-to-sequence
+series: deep-learning-essentials
 ---
-
 
 Self-Attention 机制是现代深度学习的重要突破，它通过 Query-Key-Value 三元组计算，彻底解决了传统 RNN/LSTM 在处理序列数据时面临的**并行计算瓶颈**和**长距离信息损失**问题。本文将深入剖析其核心原理、多头注意力设计以及位置编码技术。
 
@@ -61,7 +58,7 @@ RNN 及其变体 LSTM 等通过按照序列顺序输入并保存 hidden state �
 
 ![Self-Attention 单头机制示意图](08-self-attention-single-head.png)
 
-*图片来源：[^3]*
+_图片来源：[^3]_
 
 不妨把输入 $a_{i}$ 当作行向量上下堆叠得到矩阵 $\mathbf{X}$，每行对应一个词向量——这就是把整个序列当成矩阵输入。如图中示例所示，$X$ 的尺寸为 $4 \times 300$，即 $T \times d_{\text{model}}$，其中 $T$ 为 token 数量——句子中多少词；$d_{\text{model}}$ 为 embedding 的输出维度。
 
@@ -143,10 +140,7 @@ ViT 将图像分割成一个个小块（patches），将这些图像块序列化
 
 ## 参考文献
 
-[^1]: 李宏毅. (2021). 机器学习 2021 - Self-attention. *YouTube*. <https://www.youtube.com/watch?v=hYdO9CscNes>
-
-[^2]: 李宏毅. (2021). 机器学习 2021 - Transformer. *YouTube*. <https://www.youtube.com/watch?v=gmsMY5kc-zw>
-
-[^3]: Wikipedia Contributors. (2024). Attention (machine learning). *Wikipedia*. <https://en.wikipedia.org/wiki/Attention_(machine_learning)>
-
-[^5]: Cordonnier, J.-B., Loukas, A., & Jaggi, M. (2020). On the Relationship between Self-attention and Convolutional Layers. *International Conference on Learning Representations (ICLR)*.
+[^1]: 李宏毅. (2021). 机器学习 2021 - Self-attention. _YouTube_. <https://www.youtube.com/watch?v=hYdO9CscNes>
+[^2]: 李宏毅. (2021). 机器学习 2021 - Transformer. _YouTube_. <https://www.youtube.com/watch?v=gmsMY5kc-zw>
+[^3]: Wikipedia Contributors. (2024). Attention (machine learning). _Wikipedia_. <https://en.wikipedia.org/wiki/Attention_(machine_learning)>
+[^5]: Cordonnier, J.-B., Loukas, A., & Jaggi, M. (2020). On the Relationship between Self-attention and Convolutional Layers. _International Conference on Learning Representations (ICLR)_.

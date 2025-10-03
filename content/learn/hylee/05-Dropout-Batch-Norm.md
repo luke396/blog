@@ -1,24 +1,23 @@
 ---
-title: "深度学习优化技巧：Dropout 与 Batch Normalization"
+title: 深度学习优化技巧：Dropout 与 Batch Normalization
 date: "2025-08-03T11:40:47+08:00"
 draft: false
-description: "深入解析深度学习中两大关键技术：Dropout正则化与Batch Normalization优化方法，包含核心原理、实现细节和实际应用指南。"
-tags: 
-    - dropout
-    - batch-normalization
-    - regularization
-    - deep-learning
-    - optimization
-    - neural-networks
+description: 深入解析深度学习中两大关键技术：Dropout正则化与Batch Normalization优化方法，包含核心原理、实现细节和实际应用指南。
+tags:
+  - deep-learning
+  - neural-networks
+  - optimization
+  - regularization
 keywords:
-    - dropout-regularization
-    - batch-normalization
-    - deep-learning-optimization
-    - neural-network-training
-    - overfitting-prevention
-    - gradient-descent
-series: "deep-learning-essentials"
+  - dropout-regularization
+  - batch-normalization
+  - deep-learning-optimization
+  - neural-network-training
+  - overfitting-prevention
+  - gradient-descent
+series: deep-learning-essentials
 ---
+
 这篇博文通过解释 Dropout 和 Batch Normalization 的核心原理、实现细节和主要作用，旨在帮助读者理解这两种在深度学习训练中常用的正则化与优化技术。
 
 > 延伸视频讲解：Hylee 2021 机器学习课程相关章节[^hylee-video]。
@@ -36,6 +35,7 @@ Dropout 是神经网络训练过程中的一种常用技术，其核心思想是
 在实际计算中，有两个关键细节需要注意：
 
 - 训练时的缩放处理 - Inverted Dropout
+
   - 当按照概率 $p$ 舍去一部分节点时（即给这些节点赋值 0），为了维持该层输出的总期望在训练和测试时保持一致，要对未被丢弃的节点进行放缩
   - 具体操作：将原输出值除以 $(1-p)$
   - 举例：当 $p=0.5$ 时，随机将一半节点赋值为 0，同时对另一半节点的数值翻倍，以保持期望不变 [^1]
@@ -83,20 +83,19 @@ z 值归一化 - z score normalization 其中一种。计算同一维度分量�
 
 二者在提高模型泛化能力的角度来看，都是通过引入噪声来实现的。
 
-Dropout 的噪声是**结构性**的，通过随机“关闭”神经元（可以看作是乘上0或1的随机掩码），直接改变了网络的结构，是一种乘性噪声。
+Dropout 的噪声是**结构性**的，通过随机“关闭”神经元（可以看作是乘上 0 或 1 的随机掩码），直接改变了网络的结构，是一种乘性噪声。
 
 这种做法，强制模型在训练时不依赖于特定的神经元，不得不学会和利用不同的、冗余的神经元组合做出决策，从而增强了模型的鲁棒性。
 
 Batch Normalization 的噪声是**数据驱动**的。它来自于使用当前小批量（mini-batch）的统计数据（均值和方差）来标准化数据，而不是使用整个训练集的精确统计数据。因为每个批次的数据都有随机性，所以计算出的均值和方差会轻微波动，这种波动就为训练过程带来了噪声。
 
-即使是相同的样本，由于在不同批次中被送入训练，其经过BN层之后的结果也会不同，这种噪声波动，正是由于不同批次引入。
+即使是相同的样本，由于在不同批次中被送入训练，其经过 BN 层之后的结果也会不同，这种噪声波动，正是由于不同批次引入。
 
-> 在这里，我们关注的是数据的“行为”，至于他是什么分布，是不是在BN之后符合某种漂亮的分布，这不重要。很大程度上，这是“工程化思维”，经验主义的胜利。
+> 在这里，我们关注的是数据的“行为”，至于他是什么分布，是不是在 BN 之后符合某种漂亮的分布，这不重要。很大程度上，这是“工程化思维”，经验主义的胜利。
 
 ## Reference
 
-[^1]:<https://d2l.ai/chapter_multilayer-perceptrons/dropout.html#dropout>
-[^2]:<https://d2l.ai/chapter_convolutional-modern/batch-norm.html#batch-normalization>
-[^3]:<https://github.com/datawhalechina/leedl-tutorial>
-
+[^1]: <https://d2l.ai/chapter_multilayer-perceptrons/dropout.html#dropout>
+[^2]: <https://d2l.ai/chapter_convolutional-modern/batch-norm.html#batch-normalization>
+[^3]: <https://github.com/datawhalechina/leedl-tutorial>
 [^hylee-video]: <https://www.youtube.com/playlist?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J>（Hylee 2021 机器学习课程中关于 Dropout 与 Batch Normalization 的章节）

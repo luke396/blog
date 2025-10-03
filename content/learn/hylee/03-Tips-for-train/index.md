@@ -1,28 +1,22 @@
 ---
-title: "机器学习训练优化技巧：Critical Point、Batch、Momentum与自适应学习率详解"
+title: 机器学习训练优化技巧：Critical Point、Batch、Momentum与自适应学习率详解
 date: "2025-07-07T11:14:35+08:00"
 draft: false
-description: "深入解析机器学习训练停滞的根本原因与解决方案。从鞍点与局部最小值的数学原理，到批次大小、动量优化、自适应学习率的实践应用，全面掌握从AdaGrad到AdamW的优化器演进历程。"
+description: 深入解析机器学习训练停滞的根本原因与解决方案。从鞍点与局部最小值的数学原理，到批次大小、动量优化、自适应学习率的实践应用，全面掌握从AdaGrad到AdamW的优化器演进历程。
 keywords:
-    - optimization-techniques
-    - critical-point-analysis
-    - gradient-descent
-    - momentum-optimization
-    - adaptive-learning-rate
-    - adam-optimizer
-    - batch-size-effects
-    - adamw-decoupling
+  - optimization-techniques
+  - critical-point-analysis
+  - gradient-descent
+  - momentum-optimization
+  - adaptive-learning-rate
+  - adam-optimizer
+  - batch-size-effects
+  - adamw-decoupling
 tags:
-    - critical-point
-    - batch
-    - momentum
-    - adaptive-learning-rate
-    - adam
-    - rmsprop
-
-series: "deep-learning-essentials"
+  - deep-learning
+  - optimization
+series: deep-learning-essentials
 ---
-
 
 这篇博文总结了深度学习训练优化的核心技巧，解释了当损失不再下降时可能遇到的鞍点问题、批次大小（Batch）和动量（Momentum）的作用，并详细阐述了从 AdaGrad 到 AdamW 等自适应学习率方法的发展脉络。
 
@@ -77,7 +71,6 @@ $$
 因此，当特征值 $\lambda < 0$ 时，$L(\theta) < L(\theta')$。这意味着，只要我们沿着 Hessian 矩阵负特征值对应的特征向量方向更新参数，就能够找到一个使损失函数下降的方向，从而逃离鞍点。
 
 > $\mu^{2}$ 是逐个元素的平方，而 $\lVert\mu\rVert^{2}$ 是范数的平方
->
 
 > PPT[^2] 上有个实际计算的简单示例，演示了具体计算过程。
 
@@ -152,7 +145,7 @@ $$
 m^{t} = \lambda m^{t-1} - \eta g^{t}
 $$
 
- 其中 $\lambda$ 是动量系数（通常接近 1，如 0.9），$\eta$ 是学习率。初始动量 $m^0=0$。
+其中 $\lambda$ 是动量系数（通常接近 1，如 0.9），$\eta$ 是学习率。初始动量 $m^0=0$。
 
 **更新参数 $\theta^t$：**
 
@@ -160,7 +153,7 @@ $$
  \theta^{t+1} = \theta^{t} + m^{t}
 $$
 
- 通过展开这个递推式，我们可以看到 $m^t$ 是过去所有梯度的指数衰减加权和：$m^1 = -\eta g^0$,$m^2 = \lambda m^1 - \eta g^1 = -\lambda \eta g^0 - \eta g^1$, $m^t = -\eta \sum_{i=0}^{t-1} \lambda^{t-1-i} g^i$。因此，Movement $m^t$ 是之前所有梯度 $g^0, \dots, g^{t-1}$ 的加权和，越近的梯度权重越高。
+通过展开这个递推式，我们可以看到 $m^t$ 是过去所有梯度的指数衰减加权和：$m^1 = -\eta g^0$,$m^2 = \lambda m^1 - \eta g^1 = -\lambda \eta g^0 - \eta g^1$, $m^t = -\eta \sum_{i=0}^{t-1} \lambda^{t-1-i} g^i$。因此，Movement $m^t$ 是之前所有梯度 $g^0, \dots, g^{t-1}$ 的加权和，越近的梯度权重越高。
 
 另一种更加常见的表达方式是首先计算速度向量 (velocity)，$v^t=\beta v^{t-1}+ (1-\beta)g^t$，然后利用其更新参数 $\theta^{t+1}=\theta^t-\eta v^t$。
 
@@ -193,7 +186,6 @@ $$
 $$
 
 > 省略为了区分单个参数 $i$ 的下标，参数 $\theta_{i}^{t}$ 简化为 $\theta^{t}$
->
 
 > 经典的 AdaGrad 形式上没有 $\frac{1}{t+1}$ 这个因子平衡，而仅仅是过往梯度的平方和累加。所以，其最主要的问题其实是 $\theta$ 更新的分母单调递增。
 
@@ -224,7 +216,6 @@ $$
 > 注意 " 偏差修正 " 部分。这种修正适用于任何指数平均 (EMA) $S_{t}=\beta S_{t-1}+(1-\beta)x_{t}$ 来估计一个从零 ($S_{0}=0$ 或者其他 " 冷启动 " 指定初始值，而不是实际的初始状态) 开始的信号场景。
 >
 > 稍作整理可以得到 $S_{t}=(1-\beta)\sum_{i=1}^{t}\beta^{t-i}x_{i}$。我们希望 $S_{t}$ 是对原始状态真实期望 $E(x_{t})$ 的无偏估计。假设所有的 $x$ 来自同一分布，同期望 $E(x_{i})=E(x)$，$E(S_{t})=(1-\beta)\sum_{i=1}^{t}\beta^{t-i}E(x_{i})=E(x)(1-\beta)\sum_{i=1}^{t}\beta^{t-i}$。这是个等比数列，其数列和进一步可以简化为 $E(S_{t})=E(x)(1-\beta) \frac{{1-\beta^t}}{1-\beta}=E(x)(1-\beta^t)$。那么 $\hat{S}_{t}=\frac{S_{t}}{1-\beta^t}$ 就是一个对 $E(x)$ 的无偏估计。
->
 
 > 这种修正，是为了修正在 $t$ 比较小的时的估计精度。
 

@@ -1,23 +1,22 @@
 ---
-title: "从 One-Hot Vector 到 Softmax：分类问题的设计"
+title: 从 One-Hot Vector 到 Softmax：分类问题的设计
 date: "2025-07-10T16:37:14+08:00"
 draft: false
-description: "深入理解分类神经网络的完整设计链路：从 one-hot 编码消除类别排序偏差，到 softmax 生成概率分布，再到交叉熵损失优化训练过程。通过数学推导和误差面可视化，全面解析分类任务中输出层设计的核心原理。"
+description: 深入理解分类神经网络的完整设计链路：从 one-hot 编码消除类别排序偏差，到 softmax 生成概率分布，再到交叉熵损失优化训练过程。通过数学推导和误差面可视化，全面解析分类任务中输出层设计的核心原理。
 keywords:
-    - one-hot-encoding
-    - softmax-function  
-    - cross-entropy-loss
-    - classification-networks
-    - neural-network-theory
-    - loss-function-optimization
-    - gradient-descent-optimization
-    - logits-interpretation
-tags: 
-    - one-hot
-    - softmax
-    - cross-entropy
-    - classification
-series: "deep-learning-essentials"
+  - one-hot-encoding
+  - softmax-function
+  - cross-entropy-loss
+  - classification-networks
+  - neural-network-theory
+  - loss-function-optimization
+  - gradient-descent-optimization
+  - logits-interpretation
+tags:
+  - classification
+  - deep-learning
+  - neural-networks
+series: deep-learning-essentials
 ---
 
 这篇博文解释了在多分类任务中，为何要使用 one-hot 编码处理标签、Softmax 函数处理模型输出，以及交叉熵损失函数（而非均方误差）来衡量预测与真实值之间的差距，从而构建一个高效且易于优化的神经网络模型。

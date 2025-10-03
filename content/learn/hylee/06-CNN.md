@@ -1,24 +1,20 @@
 ---
-title: "从神经元到滤波器：两个故事下的卷积神经网络 (CNN)"
+title: 从神经元到滤波器：两个故事下的卷积神经网络 (CNN)
 date: "2025-08-12T16:35:58+08:00"
 draft: false
-description: "通过神经元优化和滤波器检测两种视角，深入解析CNN的三大核心设计：局部感受野、参数共享和池化，理解其在图像处理中的优势与应用"
+description: 通过神经元优化和滤波器检测两种视角，深入解析CNN的三大核心设计：局部感受野、参数共享和池化，理解其在图像处理中的优势与应用
 tags:
-    - convolutional-neural-network
-    - deep-learning
-    - computer-vision
-    - receptive-field
-    - parameter-sharing
-    - pooling
-    - feature-extraction
+  - cnn
+  - computer-vision
+  - deep-learning
 keywords:
-    - cnn-architecture
-    - convolution-layer
-    - feature-map
-    - image-classification
-    - neural-network-optimization
-    - deep-learning-fundamentals
-series: "deep-learning-essentials"
+  - cnn-architecture
+  - convolution-layer
+  - feature-map
+  - image-classification
+  - neural-network-optimization
+  - deep-learning-fundamentals
+series: deep-learning-essentials
 ---
 
 这篇博文通过两种不同的叙事角度，生动地解释了卷积神经网络（CNN）如何通过局部感受野、参数共享和池化这三大核心设计，来有效处理图像数据并解决传统全连接网络参数过多的问题。
@@ -105,4 +101,4 @@ Vision Transformer (ViT) 从架构上进行改变，把图像看作类似 word s
 
 ## Reference
 
-[^1]:<https://www.youtube.com/watch?v=OP5HcXJg2Aw>
+[^1]: <https://www.youtube.com/watch?v=OP5HcXJg2Aw>

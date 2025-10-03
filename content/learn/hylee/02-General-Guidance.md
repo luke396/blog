@@ -1,30 +1,25 @@
 ---
-title: "机器学习模型诊断与优化指南：训练误差与测试误差系统性分析"
+title: 机器学习模型诊断与优化指南：训练误差与测试误差系统性分析
 date: "2025-07-02T13:47:30+08:00"
 draft: false
-description: "系统性机器学习模型优化指南：通过训练误差与测试误差的分析框架，识别模型偏差、优化困难、过拟合和数据分布不匹配问题，提供具体的诊断方法与改进策略，助力构建高性能ML模型。"
+description: 系统性机器学习模型优化指南：通过训练误差与测试误差的分析框架，识别模型偏差、优化困难、过拟合和数据分布不匹配问题，提供具体的诊断方法与改进策略，助力构建高性能ML模型。
 keywords:
-    - machine-learning-optimization
-    - training-testing-error-analysis
-    - bias-variance-tradeoff
-    - model-capacity-tuning
-    - overfitting-prevention
-    - gradient-optimization
-    - regularization-techniques
-    - data-distribution-mismatch
-    - neural-network-debugging
-    - ml-performance-diagnosis
+  - machine-learning-optimization
+  - training-testing-error-analysis
+  - bias-variance-tradeoff
+  - model-capacity-tuning
+  - overfitting-prevention
+  - gradient-optimization
+  - regularization-techniques
+  - data-distribution-mismatch
+  - neural-network-debugging
+  - ml-performance-diagnosis
 tags:
-    - model-diagnosis
-    - training-optimization
-    - overfitting-control
-    - bias-variance-analysis
-    - gradient-descent-issues
-    - regularization-methods
-    - model-capacity
-    - error-analysis
-    - deep-learning-debugging
-series: "deep-learning-essentials"
+  - deep-learning
+  - model-diagnostics
+  - optimization
+  - regularization
+series: deep-learning-essentials
 ---
 
 这篇文章系统梳理了机器学习模型优化的核心指南，聚焦训练误差与测试误差的联合分析方法，帮助读者识别高偏差、优化困难、过拟合与分布不匹配等常见问题，并提供相应的改进策略。
@@ -37,7 +32,7 @@ series: "deep-learning-essentials"
 
 在机器学习项目中，理想情况下训练集误差和测试集误差都很小，这意味着模型成功地学习了数据中的模式并能够很好地泛化到新数据。然而，实际情况往往更加复杂，需要我们系统性地分析和解决各种问题。
 
-本文用 " 训练误差→测试误差 " 两步排查流程，教初学者判断模型性能不佳的根本原因（模型偏差、优化问题、过拟合或数据分布不匹配），并给出针对性的改进策略。
+本文用 " 训练误差 → 测试误差 " 两步排查流程，教初学者判断模型性能不佳的根本原因（模型偏差、优化问题、过拟合或数据分布不匹配），并给出针对性的改进策略。
 
 ## 机器学习模型诊断流程
 
@@ -63,7 +58,7 @@ flowchart TD
     A -- Small --> E
 
     B -- "Model bias" --> C
-    B -- "Optimisation issue" --> D 
+    B -- "Optimisation issue" --> D
 
     E -- Large --> F
     E -- Small --> I

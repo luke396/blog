@@ -1,18 +1,14 @@
 ---
-title: "深度学习入门：从机器学习三步走到神经网络与反向传播算法详解"
+title: 深度学习入门：从机器学习三步走到神经网络与反向传播算法详解
 date: "2025-04-14T19:02:45+08:00"
 draft: false
 tags:
   - deep-learning
-  - gradient-descent
   - neural-networks
-  - backpropagation
-  - activation-functions
-  - machine-learning
   - optimization
-series: "deep-learning-essentials"
-author: "Luke"
-description: "机器学习三步走方法详解：模型假设、损失函数定义与梯度下降优化。介绍神经网络结构、激活函数选择和反向传播算法原理，以YouTube观看量预测为例展示完整流程。"
+series: deep-learning-essentials
+author: Luke
+description: 机器学习三步走方法详解：模型假设、损失函数定义与梯度下降优化。介绍神经网络结构、激活函数选择和反向传播算法原理，以YouTube观看量预测为例展示完整流程。
 keywords:
   - deep-learning-basics
   - machine-learning-fundamentals
